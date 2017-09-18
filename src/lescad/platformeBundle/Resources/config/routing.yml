@@ -1,0 +1,29 @@
+# Page d'accueil
+lescadplatforme_accueil:
+    path:     /
+    defaults:
+        _controller: lescadplatformeBundle:Default:index
+
+# Liste les services
+lescadplatforme_services:
+    path:     /services
+    defaults:
+        _controller: lescadplatformeBundle:Default:services
+
+# Voir en détail un service
+lescadplatforme_service:
+    path:     /service/{id}
+    defaults:
+        _controller: lescadplatformeBundle:Default:service
+
+# Affiche le formulaire des nouveaux clients
+lescadplatforme_client:
+    path:     /contact
+    defaults:
+        _controller: lescadplatformeBundle:Default:client
+
+# Espace recrutement
+lescadplatforme_recrutement:
+    path:     /recrutement
+    defaults:
+        _controller: lescadplatformeBundle:Default:recrutement

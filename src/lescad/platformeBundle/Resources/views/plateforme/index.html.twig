@@ -1,0 +1,12 @@
+{% extends "lescadplatformeBundle::layout.html.twig" %}
+
+{% block titre %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block css %} {{ parent()}} <link href="{{asset('bundles/lescadplatforme/css/accueil.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block lescadplatforme_body %}
+
+{% endblock %}
