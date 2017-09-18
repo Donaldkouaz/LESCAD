@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: lescad
+    database_user: root
+    database_password: null
+    mailer_transport: gmail
+    mailer_host: smtp.gmail.com
+    mailer_user: donald.kouazoun@gmail.com
+    mailer_password: donaldinho2010@
+    secret: 4bf7e543c0d66e1e48ec840d484d235e4eecb412
