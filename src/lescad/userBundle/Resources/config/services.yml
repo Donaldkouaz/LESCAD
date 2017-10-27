@@ -2,3 +2,9 @@ services:
 #    lescaduser.example:
 #        class: lescad\userBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    lescaduser.admin.user:
+        class: lescad\userBundle\Admin\userAdmin
+        arguments: [~, lescad\userBundle\Entity\user, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: user }
+        public: true

@@ -8,5 +8,5 @@ parameters:
     mailer_transport: gmail
     mailer_host: smtp.gmail.com
     mailer_user: donald.kouazoun@gmail.com
-    mailer_password: donaldinho2010@
+    mailer_password: 04481099@
     secret: 4bf7e543c0d66e1e48ec840d484d235e4eecb412

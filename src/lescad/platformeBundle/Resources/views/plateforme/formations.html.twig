@@ -1,0 +1,79 @@
+{% extends "lescadplatformeBundle::layout.html.twig" %}
+
+{% block titre %}
+    Formations - {{ parent() }}
+{% endblock %}
+{% block css %} 
+    {{ parent()}} <link href="{{asset('bundles/lescadplatforme/css/formations.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block lescadplatforme_body %}
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-3 col-sm-4 prin">
+
+                {% include "lescadplatformeBundle:plateforme:formations_categories.html.twig" %}
+
+                {% block userleft %}
+                {% endblock userleft %}
+            </div>
+
+
+            <div class="col-sm-8 col-md-6 prin">
+                {#<h2 class="title">Parcourez toutes nos formations</h2>#}
+
+                {% if app.request.hasPreviousSession %}
+                    {% for type, messages in app.session.flashbag.all() %}
+                        {% for message in messages %}
+                            <div class="flash-{{ type }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+
+
+                {% if formations is null %}
+                    <h1>Il n'y a aucune formation dans cette categorie pour le moment</h1>
+                {% else %}
+                    {% for formation in formations %}
+                        <div class="well">
+                            <h1>{{ formation.nom }}</h1>
+                            <p>{{ formation.description|truncate(120, true, " ...") }}</p>
+                            <div>
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <div class="more label"><a href="{{ path('admin_lescad_platforme_formation_edit', { 'id': formation.id }) }}">Modifier</a></div> 
+                                {% endif %}
+                                <div class="tags">
+                                    <span class="btn-info"><a href="#">Commencer</a></span><span class="btn-info"><a href="{{ path('lescadplatforme_formation', { 'formationSlug': formation.slug }) }}">Voir</a></span>
+                                </div>    
+                            </div> 
+                            <div class="clear"></div>      
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% if categorie is defined %}
+                    {% include "lescadplatformeBundle:plateforme:pagination_formation.html.twig" %}
+                {% else %}
+                    {% include "lescadplatformeBundle:plateforme:pagination_formations.html.twig" %}
+                {% endif %}
+
+            </div>
+
+
+            <div class="col-md-3 hidden-sm hidden-xs  prin">
+                <div class="well">
+                    <div class="page-header text-center">
+                        <h4> Demander une formation </h4>
+                    </div>
+                    {{ form(form) }}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

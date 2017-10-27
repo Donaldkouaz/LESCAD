@@ -2,28 +2,66 @@
 lescadplatforme_accueil:
     path:     /
     defaults:
-        _controller: lescadplatformeBundle:Default:index
+        _controller: lescadplatformeBundle:Platforme:index
 
 # Liste les services
 lescadplatforme_services:
     path:     /services
     defaults:
-        _controller: lescadplatformeBundle:Default:services
+        _controller: lescadplatformeBundle:Platforme:services
 
 # Voir en détail un service
 lescadplatforme_service:
     path:     /service/{id}
     defaults:
-        _controller: lescadplatformeBundle:Default:service
+        _controller: lescadplatformeBundle:Platforme:service
 
 # Affiche le formulaire des nouveaux clients
-lescadplatforme_client:
-    path:     /contact
+lescadplatforme_demande_cours:
+    path:     /demander-un-cours
     defaults:
-        _controller: lescadplatformeBundle:Default:client
+        _controller: lescadplatformeBundle:Platforme:demandeCours
 
 # Espace recrutement
 lescadplatforme_recrutement:
     path:     /recrutement
     defaults:
-        _controller: lescadplatformeBundle:Default:recrutement
+        _controller: lescadplatformeBundle:Platforme:recrutement
+
+# Voir les formations
+lescadplatforme_formations:
+    path:      /formations/{page}
+    defaults: 
+        _controller: lescadplatformeBundle:Platforme:formations
+        page: 1
+    requirements:
+        page: \d+
+
+        # Voir les formations par categorie
+lescadplatforme_formations_categorie:
+    path:      /formations/{categorie}/{page}
+    defaults: 
+        _controller: lescadplatformeBundle:Platforme:formationsCat
+        page: 1
+    requirements:
+        page: \d+
+        
+        # Voir une formation spécifique
+lescadplatforme_formation:
+    path:      /formation/{formationSlug}
+    defaults: 
+        _controller: lescadplatformeBundle:Platforme:formation
+        
+# Soutiens scolaires services
+lescadplatforme_ss:
+    path:      /soutiens-scolaires
+    defaults: 
+        _controller: lescadplatformeBundle:Platforme:ss
+        
+# Voir une offre de soutien scolaire
+lescadplatforme_sss:
+    path:      /soutiens-scolaires/{sssSlug}
+    defaults: 
+        _controller: lescadplatformeBundle:Platforme:sss
+
+

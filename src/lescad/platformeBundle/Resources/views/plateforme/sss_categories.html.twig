@@ -1,0 +1,12 @@
+  {% if categories is defined %}
+  <div class=" well sidebarservices">
+        <h3 class="text-center"><b>Offres</b></h3><hr>
+		{% if categories is null %}
+			<li><a href="#">Aucune Catégorie active pour le moment</a></li>
+		{% else %}
+		{% for categorie in categories %}
+			<li {% if sss is defined and categorie == sss %} class="active" {% endif %}><a href="{{ path('lescadplatforme_sss', { 'sssSlug': categorie.slug }) }}">{{ categorie.nom }}</a></li>
+		{% endfor %}
+		</div>
+		{% endif %}
+		{% endif %}

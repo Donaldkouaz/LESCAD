@@ -1,0 +1,40 @@
+{% extends "lescadplatformeBundle::layout.html.twig" %}
+
+{% block titre %}
+   Soutiens Scolaire - {{ parent() }}
+{% endblock %}
+{% block css %} 
+{{ parent()}} <link href="{{asset('bundles/lescadplatforme/css/ss.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block lescadplatforme_body %}
+<div class="container">
+
+      <div class="row">
+        
+          {% if app.request.hasPreviousSession %}
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="flash-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        
+        <div class="page-header text-center">
+            <h1>Nos offres de soutiens scolaires</h1>
+            </div>
+        {% for service in sss %}
+        <div class="col-md-4 col-sm-6 well">
+            <h2 class="text-center" ><a href="{{ path('lescadplatforme_sss', { 'sssSlug': service.slug }) }}">{{ service.nom }}</a></h2>
+            <p class="text-justify" >
+                {{ service.description|truncate(130, true, " ...") }}
+            </p>
+
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+{% endblock %}

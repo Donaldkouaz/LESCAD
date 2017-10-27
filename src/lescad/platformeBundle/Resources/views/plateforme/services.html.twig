@@ -6,4 +6,41 @@
 
 {% block lescadplatforme_body %}
 
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div class="page-header text-center">
+        <h1>Profitez de nos services</h1>
+    </div>
+
+    <div class="container">
+        <div class="row pricing">
+            <div class="col-md-6">
+                <div class="well">
+                    <h3 class="text-center"><b>SOUTIENS SCOLAIRES</b></h3>
+                    <hr>
+                    {% for service in sss %}
+                        <p><b><a href="{{ path('lescadplatforme_sss', { 'sssSlug': service.slug }) }}">{{ service.nom }}</a></b></p><hr/>
+                            {% endfor %}
+                    <a href="{{path('lescadplatforme_ss')}}" class="btn btn-default btn-block">En savoir plus</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="well">
+                    <h3 class="text-center"><b>NOS FORMATIONS</b></h3><hr/>
+                    {% for index, categorie in categories if index < 4 %}
+                        <p><b><a href="{{ path('lescadplatforme_formations_categorie', { 'categorie': categorie.slug }) }}">{{ categorie.nom }}</a></b></p><hr/>
+                            {% endfor %}
+                    <a href="{{path('lescadplatforme_formations')}}" class="btn btn-default btn-block">Voir toutes les formations</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

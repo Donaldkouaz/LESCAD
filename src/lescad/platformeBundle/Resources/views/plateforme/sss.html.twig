@@ -1,0 +1,71 @@
+{% extends "lescadplatformeBundle::layout.html.twig" %}
+
+{% block titre %}
+    {% if sss is null %} Page introuvable {% else %}{{ sss.nom|upper }}{% endif %} - {{ parent() }}
+{% endblock %}
+{% block css %} 
+    {{ parent()}} <link href="{{asset('bundles/lescadplatforme/css/sss.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block lescadplatforme_body %}
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-3 col-sm-4 prin">
+
+                {% include "lescadplatformeBundle:plateforme:sss_categories.html.twig" %}
+
+                {% block userleft %}
+                {% endblock userleft %}
+            </div>
+
+
+            <div class="col-sm-8 col-md-6 prin">
+                {#<h2 class="title">Parcourez toutes nos formations</h2>#}
+
+                {% if app.request.hasPreviousSession %}
+                    {% for type, messages in app.session.flashbag.all() %}
+                        {% for message in messages %}
+                            <div class="flash-{{ type }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if sss is null %}
+                            <h1 class="text-center"> Cette offre n'est pas disponible sur ce site </h1>
+                        {% else %}			
+                            <div class="well">
+                                <h3 class="text-center"><b>{{ sss.nom|upper }}</b></h3><hr/>
+
+                                <p><b>{{ sss.description }}</b></p>
+                                <hr>
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <div class="more label"><a href="{{ path('admin_lescad_platforme_sss_edit', { 'id': sss.id }) }}">Modifier</a></div> 
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="col-md-3 hidden-sm hidden-xs  prin">
+                <div class="well">
+                    <div class="page- text-center">
+                        <h4> Demander ce service </h4>
+                    </div>
+                    {{ form(form) }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

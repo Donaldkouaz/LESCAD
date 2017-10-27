@@ -1,0 +1,15 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block titre %}
+ Connexion - {{  parent() }}
+{% endblock %}
+
+{% block css %} {{ parent()}} <link href="{{asset('bundles/lescadplatforme/css/login.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block fos_user_content %}
+    <div class ="well">
+        <h1 class="text-center"> Connection </h1><hr/>
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+    </div>
+{% endblock fos_user_content %}
