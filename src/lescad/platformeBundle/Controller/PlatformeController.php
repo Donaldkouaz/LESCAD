@@ -1,5 +1,7 @@
 <?php
 
+//Ce controleur est le controleur principal de la plateforme
+
 namespace lescad\platformeBundle\Controller;
 
 use lescad\platformeBundle\Entity\DemandeCours;
@@ -10,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PlatformeController extends Controller {
 
+//    Methode index pour la page d'accueil 
     public function indexAction() {
         return $this->render('lescadplatformeBundle:plateforme:index.html.twig');
     }
