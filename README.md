@@ -1,4 +1,5 @@
-lescad
+LESCAD (LES Cours A Domicile)
 ======
 
-A Symfony project created on September 10, 2017, 8:28 pm.
+LESCAD est un projet pour la réalisation d'une plateforme web fonctionnant sous symfony.
+
