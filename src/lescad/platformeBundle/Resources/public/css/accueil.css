@@ -1,9 +1,31 @@
 body
 {
-    
+
 }
 .banniere
 {
-margin-left: 0px;
+    margin-left: 0px;
     margin-top: 51px;
+}
+
+
+/*SLIDER SECTION CSS*/
+
+*{
+    box-sizing: border-box;
+}
+body{margin: auto;font-family: calibri;}
+#slider .container-fluid{
+    padding: 0 15px;
+}
+#slider .slider-inner{
+    padding: 0;
+}
+.slider-inner .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.slider-inner h1{
+    color: purple;
 }

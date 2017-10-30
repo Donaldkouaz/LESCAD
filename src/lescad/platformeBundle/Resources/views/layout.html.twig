@@ -9,12 +9,16 @@
 {% endblock %}
 
 {% block body %}
-    <div>
-      <img src="{{asset('bundles/lescadplatforme/images/banner.png')}}" alt="LESCAD Banner" style="width:100%; padding-top:51px; padding-bottom: 10px;">
-      
-    </div>
+    {% block baniere %}
+        <div>
+            <img src="{{asset('bundles/lescadplatforme/images/banner.png')}}" alt="LESCAD Banner" style="width:100%; padding-top:51px; padding-bottom: 10px;">     
+        </div>
+    {% endblock %}
+    {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+    {% block lescadplatforme_body %}
+    {% endblock %}
+{% endblock %}
 
-  {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
-  {% block lescadplatforme_body %}
-  {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 {% endblock %}
