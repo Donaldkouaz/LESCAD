@@ -5,7 +5,13 @@
 namespace lescad\platformeBundle\Controller;
 
 use lescad\platformeBundle\Entity\DemandeCours;
+use lescad\platformeBundle\Entity\ServiceClient;
+use lescad\platformeBundle\Entity\Suggestion;
+use lescad\platformeBundle\Entity\DemandeRecrut;
 use lescad\platformeBundle\Form\DemandeCoursType;
+use lescad\platformeBundle\Form\DemandeRecrutType;
+use lescad\platformeBundle\Form\ServiceClientType;
+use lescad\platformeBundle\Form\SuggestionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,8 +56,25 @@ class PlatformeController extends Controller {
         ));
     }
 
-    public function recrutementAction() {
-        return $this->render('lescadplatformeBundle:plateforme:recrutement.html.twig');
+       
+    public function RecrutementAction(Request $request) {
+
+        $demande = new DemandeRecrut();
+        $form = $this->createForm(DemandeRecrutType::class, $demande)->add('Envoyer la demande', SubmitType::class);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($demande);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Votre demande a bien été envoyé. Vous serez contacté tres bientot par un agent de votre région.');
+
+            return $this->redirectToRoute('lescadplatforme_services');
+        }
+
+        return $this->render('lescadplatformeBundle:plateforme:recrutement.html.twig', array(
+                    'form' => $form->createView(),
+        ));
     }
 
     public function formationsAction(Request $request, $page) {
@@ -138,8 +161,9 @@ class PlatformeController extends Controller {
         }
 
         $demande = new DemandeCours();
-        $type = $formation->getNom();
-        $demande->setType($type);
+        $for = $formation->getNom();
+       $message = 'Bonjour, je suis interressé par la formation "'.$for.'" que vous proposez. Veuillez me recontacter, aux coordonnées indiquées. Je souhaite avoir plus d\'informations sur cette formation.';
+        $demande->setMessage($message);
         $form = $this->createForm(DemandeCoursType::class, $demande)->add('Envoyer la demande', SubmitType::class);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -173,8 +197,9 @@ class PlatformeController extends Controller {
 
 
         $demande = new DemandeCours();
-        $type = $sss->getNom();
-        $demande->setType($type);
+        $service = $sss->getNom();
+        $message = 'Bonjour, je suis interressé par votre service : '.$service.'. Veuillez me recontacter, aux coordonnées indiquées. Je souhaite avoir plus d\'informations sur ce service.';
+        $demande->setMessage($message);
         $form = $this->createForm(DemandeCoursType::class, $demande)->add('Envoyer la demande', SubmitType::class);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -191,5 +216,45 @@ class PlatformeController extends Controller {
                     'form' => $form->createView(),
         ));
     }
+    
+        public function ServiceClientAction(Request $request) {
 
+        $demande = new ServiceClient();
+        $form = $this->createForm(ServiceClientType::class, $demande)->add('Envoyer la requette', SubmitType::class);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($demande);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Votre demande a bien été envoyé. Vous serez contacté tres bientot par un agent de votre région.');
+
+            return $this->redirectToRoute('lescadplatforme_services');
+            
+        }
+        
+        return $this->render('lescadplatformeBundle:plateforme:serviceclient.html.twig', array(
+                    'form' => $form->createView(),
+        ));
+    }
+        
+        public function SuggestionAction(Request $request) {
+
+        $demande = new Suggestion();
+        $form = $this->createForm(SuggestionType::class, $demande)->add('Envoyer la suggestion', SubmitType::class);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($demande);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Votre demande a bien été envoyé. Vous serez contacté tres bientot par un agent de votre région.');
+
+            return $this->redirectToRoute('lescadplatforme_services');
+        }
+
+        return $this->render('lescadplatformeBundle:plateforme:suggestion.html.twig', array(
+                    'form' => $form->createView(),
+        ));
+    }
 }

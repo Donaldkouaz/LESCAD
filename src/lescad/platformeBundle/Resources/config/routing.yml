@@ -64,4 +64,13 @@ lescadplatforme_sss:
     defaults: 
         _controller: lescadplatformeBundle:Platforme:sss
 
+lescadplatforme_serviceclient:
+    path:      /service-client
+    defaults: 
+        _controller: lescadplatformeBundle:Platforme:serviceClient
+        
+lescadplatforme_suggestion:
+    path:      /suggestion
+    defaults: 
+        _controller: lescadplatformeBundle:Platforme:suggestion
 

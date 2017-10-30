@@ -26,56 +26,56 @@ class DemandeCours
      * 
      * 
      */
-    private $departement;
+    protected $departement;
     
     /**
      * @var bool
      *
      * @ORM\Column(name="contactee", type="boolean")
      */
-    private $contactee = false;
+    protected $contactee = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="lescad\platformeBundle\Entity\Ville", inversedBy="demandeCours", cascade={"persist"})
      * 
      * 
      */
-    private $ville;
+    protected $ville;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="message", type="text")
      */
-    private $type;
+    protected $message;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="datedemande", type="datetimetz", nullable=true)
      */
-    private $datedemande;
+    protected $datedemande;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
-    private $nom;
+    protected $nom;
 
     /**
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      */
-    private $prenom;
+    protected $prenom;
 
     /**
      * @var string
      *
      * @ORM\Column(name="telephone", type="string", length=255)
      */
-    private $telephone;
+    protected $telephone;
     
      /**
      * Constructor
@@ -144,29 +144,7 @@ class DemandeCours
         return $this->ville;
     }
 
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return DemanderCours
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
+    
 
     /**
      * Set datedemande
@@ -286,5 +264,29 @@ class DemandeCours
     public function getContactee()
     {
         return $this->contactee;
+    }
+
+    /**
+     * Set message
+     *
+     * @param string $message
+     *
+     * @return DemandeCours
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * Get message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 }

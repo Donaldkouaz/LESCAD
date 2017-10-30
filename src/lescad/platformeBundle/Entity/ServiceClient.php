@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="demande_cours")
  * @ORM\Entity(repositoryClass="lescad\platformeBundle\Repository\DemandeCoursRepository")
  */
-class DemandeCours
+class ServiceClient
 {
     /**
      * @var int
@@ -264,5 +264,29 @@ class DemandeCours
     public function getContactee()
     {
         return $this->contactee;
+    }
+
+    /**
+     * Set message
+     *
+     * @param string $message
+     *
+     * @return DemandeCours
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * Get message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 }

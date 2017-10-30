@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class DemandeCoursType extends AbstractType
+class ServiceClientType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -41,7 +41,7 @@ class DemandeCoursType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'lescad\platformeBundle\Entity\DemandeCours'
+            'data_class' => 'lescad\platformeBundle\Entity\ServiceClient'
         ));
     }
 
@@ -50,7 +50,7 @@ class DemandeCoursType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'lescad_platformebundle_demandecours';
+        return 'lescad_platformebundle_serviceclient';
     }
 
 

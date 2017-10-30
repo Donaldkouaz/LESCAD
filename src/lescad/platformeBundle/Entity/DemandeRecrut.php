@@ -5,12 +5,12 @@ namespace lescad\platformeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * DemandeCours
+ * DemandeRecrut
  *
- * @ORM\Table(name="demande_cours")
- * @ORM\Entity(repositoryClass="lescad\platformeBundle\Repository\DemandeCoursRepository")
+ * @ORM\Table(name="demande_recrut")
+ * @ORM\Entity(repositoryClass="lescad\platformeBundle\Repository\DemandeRecrutRepository")
  */
-class DemandeCours
+class DemandeRecrut
 {
     /**
      * @var int
@@ -29,13 +29,6 @@ class DemandeCours
     protected $departement;
     
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="contactee", type="boolean")
-     */
-    protected $contactee = false;
-
-    /**
      * @ORM\ManyToOne(targetEntity="lescad\platformeBundle\Entity\Ville", inversedBy="demandeCours", cascade={"persist"})
      * 
      * 
@@ -43,48 +36,52 @@ class DemandeCours
     protected $ville;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="contactee", type="boolean", nullable=true)
+     */
+    private $contactee;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="message", type="text")
      */
-    protected $message;
+    private $message;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="datedemande", type="datetimetz", nullable=true)
      */
-    protected $datedemande;
+    private $datedemande;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
-    protected $nom;
+    private $nom;
 
     /**
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      */
-    protected $prenom;
+    private $prenom;
 
     /**
      * @var string
      *
      * @ORM\Column(name="telephone", type="string", length=255)
      */
-    protected $telephone;
+    private $telephone;
+
     
-     /**
-     * Constructor
-     */
-    public function __construct()
+     public function __construct()
     {
         $this->datedemande = new \DateTime;
     }
-
 
     /**
      * Get id
@@ -96,62 +93,38 @@ class DemandeCours
         return $this->id;
     }
 
+  
     /**
-     * Set departement
+     * Set contactee
      *
-     * @param string $departement
+     * @param boolean $contactee
      *
-     * @return DemanderCours
+     * @return DemandeRecrut
      */
-    public function setDepartement($departement)
+    public function setContactee($contactee)
     {
-        $this->departement = $departement;
+        $this->contactee = $contactee;
 
         return $this;
     }
 
     /**
-     * Get departement
+     * Get contactee
      *
-     * @return string
+     * @return bool
      */
-    public function getDepartement()
+    public function getContactee()
     {
-        return $this->departement;
+        return $this->contactee;
     }
 
-    /**
-     * Set ville
-     *
-     * @param string $ville
-     *
-     * @return DemanderCours
-     */
-    public function setVille($ville)
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    /**
-     * Get ville
-     *
-     * @return string
-     */
-    public function getVille()
-    {
-        return $this->ville;
-    }
-
-    
 
     /**
      * Set datedemande
      *
      * @param \DateTime $datedemande
      *
-     * @return DemanderCours
+     * @return DemandeRecrut
      */
     public function setDatedemande($datedemande)
     {
@@ -175,7 +148,7 @@ class DemandeCours
      *
      * @param string $nom
      *
-     * @return DemanderCours
+     * @return DemandeRecrut
      */
     public function setNom($nom)
     {
@@ -199,7 +172,7 @@ class DemandeCours
      *
      * @param string $prenom
      *
-     * @return DemanderCours
+     * @return DemandeRecrut
      */
     public function setPrenom($prenom)
     {
@@ -223,7 +196,7 @@ class DemandeCours
      *
      * @param string $telephone
      *
-     * @return DemanderCours
+     * @return DemandeRecrut
      */
     public function setTelephone($telephone)
     {
@@ -243,26 +216,74 @@ class DemandeCours
     }
 
     /**
-     * Set contactee
+     * Set departement
      *
-     * @param boolean $contactee
+     * @param \lescad\platformeBundle\Entity\Departement $departement
      *
-     * @return DemandeCours
+     * @return DemandeRecrut
      */
-    public function setContactee($contactee)
+    public function setDepartement(\lescad\platformeBundle\Entity\Departement $departement = null)
     {
-        $this->contactee = $contactee;
+        $this->departement = $departement;
 
         return $this;
     }
 
     /**
-     * Get contactee
+     * Get departement
      *
-     * @return boolean
+     * @return \lescad\platformeBundle\Entity\Departement
      */
-    public function getContactee()
+    public function getDepartement()
     {
-        return $this->contactee;
+        return $this->departement;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param \lescad\platformeBundle\Entity\Ville $ville
+     *
+     * @return DemandeRecrut
+     */
+    public function setVille(\lescad\platformeBundle\Entity\Ville $ville = null)
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return \lescad\platformeBundle\Entity\Ville
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * Set message
+     *
+     * @param string $message
+     *
+     * @return DemandeRecrut
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * Get message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 }
