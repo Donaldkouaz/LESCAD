@@ -56,3 +56,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Demandes-Service }
         public: true
+
+    lescadplatforme.admin.matiere:
+        class: lescad\platformeBundle\Admin\matiereAdmin
+        arguments: [~, lescad\platformeBundle\Entity\matiere, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: matiere }
+        public: true

@@ -41,9 +41,9 @@ class formation
      /**
      * @var string
      *
-     * @ORM\Column(name="prerequis", type="text")
+     * @ORM\Column(name="prerequis", type="text", nullable=true)
      */
-    private $prerequis;
+    private $prerequis = 'Aucune connaissance spécifique n\'est requise pour commencer cette formation.';
     
     /**
      * @var string
