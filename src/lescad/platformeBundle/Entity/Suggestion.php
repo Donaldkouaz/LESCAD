@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DemandeCours
  *
- * @ORM\Table(name="demande_cours")
+ * @ORM\Table(name="suggestion")
  * @ORM\Entity(repositoryClass="lescad\platformeBundle\Repository\DemandeCoursRepository")
  */
 class Suggestion
