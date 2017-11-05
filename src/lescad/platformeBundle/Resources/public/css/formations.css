@@ -1,38 +1,38 @@
 /* Barre de gauche*/
 .sidebarservices .head {
-  text-align:center;
-  font-size:15pt;
-  background:gray;
-  color:white;
+    text-align:center;
+    font-size:15pt;
+    background:gray;
+    color:white;
 }
 
 .sidebarservices li {
-  list-style:none; 
-  background-color:#0e6eb7; 
-  margin:5px 10px;
-  text-align:left; 
-  padding: 10px 0 10px 20px;
-  border-radius:5px 5px;
-  cursor:pointer;
-  }
+    list-style:none; 
+    background-color:#0e6eb7; 
+    margin:5px 10px;
+    text-align:left; 
+    padding: 10px 0 10px 20px;
+    border-radius:5px 5px;
+    cursor:pointer;
+}
 .sidebarservices li a {
-  text-decoration:none; 
-  color:white !important;
-  font-family: Century Gothic, sans-serif;
-  }
-  .sidebarservices li:hover {
+    text-decoration:none; 
+    color:white !important;
+    font-family: Century Gothic, sans-serif;
+}
+.sidebarservices li:hover {
     background:black;
     color:black;
-  }
-  
-  .sidebarservices .active
-  {
-      background:black;
+}
+
+.sidebarservices .active
+{
+    background:black;
     color:black;
-  }
-  /*Barre centrale*/
-  
-  .clear {
+}
+/*Barre centrale*/
+
+/*  .clear {
     clear:both;    
 }
 .btn-info {
@@ -51,5 +51,52 @@
 }
 .more.label {
     float:right;    
+}*/
+
+img{width:100%;}
+*{transition: all .5s ease;-moz-transition: all .5s ease;-webkit-transition: all .5s ease}
+.my-list {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #f5efef;
+    float: left;
+    margin: 15px 0;
+    border-radius: 5px;
+    box-shadow: 2px 3px 0px #e4d8d8;
+    position:relative;
+    overflow:hidden;
+}
+.my-list h3{
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 1px solid #ccc4c4;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+.my-list span{float:left;font-weight: bold;}
+.my-list span:last-child{float:right;}
+.my-list .offer{
+    width: 100%;
+    float: left;
+    margin: 5px 0;
+    border-top: 1px solid #ccc4c4;
+    margin-top: 5px;
+    padding-top: 5px;
+    color: #afadad;
+}
+.detail {
+    position: absolute;
+    top: -107%;
+    left: 0;
+    text-align: center;
+    background: #fff;height: 100%;width:100%;
+
 }
 
+.my-list:hover .detail{top:0;}
+.clear {
+    clear:both; }

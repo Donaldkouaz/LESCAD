@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use lescad\platformeBundle\Form\ImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class FormatioAdmin extends AbstractAdmin {
@@ -31,6 +32,7 @@ class FormatioAdmin extends AbstractAdmin {
                     'multiple' => true,
                     'expanded' => false,
                 ))
+                ->add('image', ImageType::class)
                 ->add('active', CheckboxType::class, array('required' => false));
     }
 

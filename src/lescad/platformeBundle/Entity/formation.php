@@ -60,6 +60,8 @@ class formation
     private $slug;
 
     private $duree;
+    
+    private $dureereel;
 
     /**
      * @var bool
@@ -90,6 +92,12 @@ class formation
      * 
      */
      private $matieres;
+
+     /**
+     * @ORM\OneToOne(targetEntity="lescad\platformeBundle\Entity\Image", cascade={"persist", "remove"})
+     * 
+     */
+     private $image;
 
 
     /**
@@ -158,19 +166,6 @@ class formation
         return $this->description;
     }
 
-    /**
-     * Set duree
-     *
-     * @param integer $duree
-     *
-     * @return formation
-     */
-    public function setDuree($duree)
-    {
-        $this->duree = $duree;
-
-        return $this;
-    }
 
     /**
      * Get duree
@@ -184,6 +179,41 @@ class formation
             $this->duree += $matiere->getDuree();
         }
         return $this->duree;
+    }
+    
+    
+    /**
+     * Get duree
+     *
+     * @return int
+     */
+    public function getDureereel()
+    {
+        //Nombre d'heure par jour = 4; Par semaine = 8
+        $n = 4;
+        $t = $this->getDuree();
+        if($t<=$n)
+        {
+            $this->dureereel = 'Une journée';
+        }
+        elseif($t<=(2*$n))
+        {
+            $this->dureereel = 'Une semaine';
+        }
+        elseif($t<=(4*$n))
+        {
+            $this->dureereel = 'Deux semaines';
+        }
+        elseif($t<=(6*$n))
+        {
+            $this->dureereel = 'Trois semaines';
+        }
+        elseif($t<417)
+        {
+            $q = intdiv($t, 8*$n)+1;
+            $this->dureereel = $q.' mois';
+        }
+        return $this->dureereel;
     }
 
     /**
@@ -403,5 +433,29 @@ class formation
     public function getCout()
     {
         return $this->cout;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \lescad\platformeBundle\Entity\Image $image
+     *
+     * @return formation
+     */
+    public function setImage(\lescad\platformeBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \lescad\platformeBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

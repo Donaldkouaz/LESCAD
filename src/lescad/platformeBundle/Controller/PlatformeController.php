@@ -79,20 +79,20 @@ class PlatformeController extends Controller {
 
     public function formationsAction(Request $request, $page) {
 
-        $demande = new DemandeCours();
-        $form = $this->createForm(DemandeCoursType::class, $demande)->add('Envoyer la demande', SubmitType::class);
+//        $demande = new DemandeCours();
+//        $form = $this->createForm(DemandeCoursType::class, $demande)->add('Envoyer la demande', SubmitType::class);
+//
+//        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($demande);
+//            $em->flush();
+//
+//            $request->getSession()->getFlashBag()->add('notice', 'Votre demande a bien été envoyé. Vous serez contacté tres bientot par un agent de votre région.');
+//
+//            return $this->redirectToRoute('lescadplatforme_services');
+//        }
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($demande);
-            $em->flush();
-
-            $request->getSession()->getFlashBag()->add('notice', 'Votre demande a bien été envoyé. Vous serez contacté tres bientot par un agent de votre région.');
-
-            return $this->redirectToRoute('lescadplatforme_services');
-        }
-
-        $nbreParPage = 3;
+        $nbreParPage = 6;
 
         $categories = $this->getDoctrine()->getManager()->getRepository('lescadplatformeBundle:categorie')->findAllWithFormations();
 
@@ -110,26 +110,26 @@ class PlatformeController extends Controller {
                     'formations' => $formations,
                     'nbrePages' => $nbrePages,
                     'page' => $page,
-                    'form' => $form->createView(),
+//                    'form' => $form->createView(),
         ));
     }
 
     public function formationsCatAction(Request $request, $categorie, $page) {
         
-        $demande = new DemandeCours();
-        $form = $this->createForm(DemandeCoursType::class, $demande)->add('Envoyer la demande', SubmitType::class);
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($demande);
-            $em->flush();
-
-            $request->getSession()->getFlashBag()->add('notice', 'Votre demande a bien été envoyé. Vous serez contacté tres bientot par un agent de votre région.');
-
-            return $this->redirectToRoute('lescadplatforme_services');
-        }
+//        $demande = new DemandeCours();
+//        $form = $this->createForm(DemandeCoursType::class, $demande)->add('Envoyer la demande', SubmitType::class);
+//
+//        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($demande);
+//            $em->flush();
+//
+//            $request->getSession()->getFlashBag()->add('notice', 'Votre demande a bien été envoyé. Vous serez contacté tres bientot par un agent de votre région.');
+//
+//            return $this->redirectToRoute('lescadplatforme_services');
+//        }
         
-        $nbreParPage = 2;
+        $nbreParPage = 6;
         $categories = $this->getDoctrine()->getManager()->getRepository('lescadplatformeBundle:categorie')->findAllWithFormations();
 
         $formations = $this->getDoctrine()->getManager()->getRepository('lescadplatformeBundle:formation')->findByCat($categorie, $page, $nbreParPage);
@@ -146,7 +146,7 @@ class PlatformeController extends Controller {
                     'formations' => $formations,
                     'nbrePages' => $nbrePages,
                     'page' => $page,
-                    'form' => $form->createView(),
+//                    'form' => $form->createView(),
                     'categorie' => $categorie,));
     }
 

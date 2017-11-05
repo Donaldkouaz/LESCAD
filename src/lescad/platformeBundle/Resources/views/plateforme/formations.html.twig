@@ -21,7 +21,7 @@
             </div>
 
 
-            <div class="col-sm-8 col-md-6 prin">
+            <div class="col-sm-8 col-md-9 prin">
                 {#<h2 class="title">Parcourez toutes nos formations</h2>#}
 
                 {% if app.request.hasPreviousSession %}
@@ -39,19 +39,38 @@
                     <h1>Il n'y a aucune formation dans cette categorie pour le moment</h1>
                 {% else %}
                     {% for formation in formations %}
-                        <div class="well">
-                            <h1>{{ formation.nom }}</h1>
-                            <p>{{ formation.description|truncate(120, true, " ...") }}</p>
-                            <div>
-                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                    <div class="more label"><a href="{{ path('admin_lescad_platforme_formation_edit', { 'id': formation.id }) }}">Modifier</a></div> 
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="my-list">
+                                {% if formation.image is null %}
+                                    <img src="http://hpservicecenterschennai.in/images/hp_laptop_service_centers_in_guindy.png" alt="dsadas" />
+                                {% else %}
+                                    <img src="{{ asset(formation.image.lien) }}" alt="{{ formation.image.alt }}" />
                                 {% endif %}
-                                <div class="tags">
-                                    <span class="btn-info"><a href="#">Commencer</a></span><span class="btn-info"><a href="{{ path('lescadplatforme_formation', { 'formationSlug': formation.slug }) }}">Voir</a></span>
-                                </div>    
-                            </div> 
-                            <div class="clear"></div>      
+                                <h3>{{ formation.nom }}</h3>
+                                <span> Durée : {{ formation.dureereel }}</span>
+                                <span class="pull-right">{{ formation.cout }}</span>
+                                <div class="offer">{{ formation.categorie.nom }}</div>
+                                <div class="detail">
+                                    <h4>{{ formation.nom }}</h4>
+                                    <p>{{ formation.description|truncate(350, true, " ...") }}</p>
+                                    <a href="#" class="btn btn-info">Commander</a>
+                                    <a href="{{ path('lescadplatforme_formation', { 'formationSlug': formation.slug }) }}" class="btn btn-info">Voir</a>
+                                </div>
+                            </div>
                         </div>
+                        {# <div class="well">
+                             <h1>{{ formation.nom }}</h1>
+                             <p>{{ formation.description|truncate(120, true, " ...") }}</p>
+                             <div>
+                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                     <div class="more label"><a href="{{ path('admin_lescad_platforme_formation_edit', { 'id': formation.id }) }}">Modifier</a></div> 
+                                 {% endif %}
+                                 <div class="tags">
+                                     <span class="btn-info"><a href="#">Commencer</a></span><span class="btn-info"><a href="{{ path('lescadplatforme_formation', { 'formationSlug': formation.slug }) }}">Voir</a></span>
+                                 </div>    
+                             </div> 
+                             <div class="clear"></div>      
+                         </div>#}
                     {% endfor %}
                 {% endif %}
 
@@ -63,8 +82,7 @@
 
             </div>
 
-
-            <div class="col-md-3 hidden-sm hidden-xs  prin">
+            {#<div class="col-md-3 hidden-sm hidden-xs  prin">
                 <div class="well">
                     <div class="page-header text-center">
                         <h4> Demander une formation </h4>
@@ -72,7 +90,7 @@
                     {{ form(form) }}
 
                 </div>
-            </div>
+            </div>#}
 
         </div>
     </div>

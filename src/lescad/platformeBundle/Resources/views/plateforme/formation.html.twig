@@ -40,10 +40,11 @@
                             <h1 class="text-center"><b>{{ formation.nom|upper }}</b></h1><hr/>
 
                             <p><h2>Description</h2><br/>{{ formation.description }}</p>
-                            <p><h2>Durée</h2><br/> Cette formation durera : {{ formation.duree }} heures.</p>
+                            <p><h2>Durée</h2><br/> Cette formation durera : {{ formation.dureereel }}.</p>
                             <p><h2>Matières</h2><br/>
                             {% for matiere in formation.matieres %}
-                                {{ matiere.nom }} ({{ matiere.duree }} heures)<br/>
+                                <h3>{{ matiere.nom }} ({{ matiere.duree }} heures)</h3><br/>
+                                <p>{{ matiere.description }}</p>
                             {% endfor %}</p>
                             <p><h2>Pré-réquis</h2><br/>{{ formation.prerequis }}</p>
                             <p><h2>Cout</h2><br/> Le cout de cette formation est de : {{ formation.cout }}</p>
