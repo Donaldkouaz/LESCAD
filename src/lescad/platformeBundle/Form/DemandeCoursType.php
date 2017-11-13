@@ -17,9 +17,21 @@ class DemandeCoursType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nom', TextType::class)
-                ->add('prenom', TextType::class)
-                ->add('telephone', NumberType::class)
+        $builder->add('nom', TextType::class, array(
+            'attr'   => array(
+                'placeholder' => 'Votre nom',
+            )
+        ))
+                ->add('prenom', TextType::class, array(
+            'attr'   => array(
+                'placeholder' => 'Votre prénom',
+            )
+        ))
+                ->add('telephone', NumberType::class, array(
+            'attr'   => array(
+                'placeholder' => 'Votre contact',
+            )
+        ))
                 ->add('departement', EntityType::class, array(
             'class'   => 'lescadplatformeBundle:Departement',
             'choice_label'    => 'nom',
@@ -32,7 +44,12 @@ class DemandeCoursType extends AbstractType
             'multiple' => false,
             'expanded' => false,
         ))
-                ->add('message', TextareaType::class);
+                ->add('message', TextareaType::class, array(
+            'attr'   => array(
+                'placeholder' => 'Veuillez décrire le service qui vous intéresse et comment désirez-vous être recontacté',
+                'style' => 'min-height:150px;',
+            )
+        ));
     }
     
     /**

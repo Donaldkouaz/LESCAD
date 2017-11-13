@@ -162,7 +162,7 @@ class PlatformeController extends Controller {
 
         $demande = new DemandeCours();
         $for = $formation->getNom();
-       $message = 'Bonjour, je suis interressé par la formation "'.$for.'" que vous proposez. Veuillez me recontacter, aux coordonnées indiquées. Je souhaite avoir plus d\'informations sur cette formation.';
+       $message = 'Bonjour, je suis intérressé par la formation "'.$for.'" que vous proposez. Veuillez me recontacter, aux coordonnées indiquées. Je souhaite avoir plus d\'informations sur cette formation.';
         $demande->setMessage($message);
         $form = $this->createForm(DemandeCoursType::class, $demande)->add('Envoyer la demande', SubmitType::class);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {

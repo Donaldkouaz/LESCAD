@@ -4,6 +4,8 @@ namespace lescad\platformeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
@@ -11,6 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="formation")
  * @ORM\Entity(repositoryClass="lescad\platformeBundle\Repository\formationRepository")
+ * @Vich\Uploadable
  * @ORM\HasLifecycleCallbacks()
  */
 class formation
@@ -106,6 +109,30 @@ class formation
      * 
      */
     private $categorie;
+
+    
+     /**
+     * 
+     * @Vich\UploadableField(mapping="formation_image", fileNameProperty="nomImage", size="tailleImage")
+     * 
+     * @var File
+     */
+    private $fichierImage;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $nomImage;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var integer
+     */
+    private $tailleImage;
+
 
 
     /**
@@ -433,5 +460,29 @@ class formation
     public function getCout()
     {
         return $this->cout;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \lescad\platformeBundle\Entity\Image $image
+     *
+     * @return formation
+     */
+    public function setImage(\lescad\platformeBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \lescad\platformeBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

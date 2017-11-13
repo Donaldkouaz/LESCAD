@@ -146,4 +146,17 @@ sonata_block:
             
 sonata_admin:
     title:      LESCAD
-    
+   
+vich_uploader:
+        db_driver: orm
+        mappings:
+            formation_image:
+                uri_prefix:         /lescad/web/images/formations
+                upload_destination: '%kernel.root_dir%/../web/images/formations'
+                namer:
+                    service: vich_uploader.namer_property
+                    options: { property: 'slug'}
+                
+                inject_on_load:     true
+                delete_on_update:   true
+                delete_on_remove:   true

@@ -4,17 +4,19 @@ namespace lescad\platformeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * formation
  *
  * @ORM\Table(name="formation")
  * @ORM\Entity(repositoryClass="lescad\platformeBundle\Repository\formationRepository")
+ * @Vich\Uploadable
  * @ORM\HasLifecycleCallbacks()
  */
-class formation
-{
+class formation {
+
     /**
      * @var int
      *
@@ -37,14 +39,14 @@ class formation
      * @ORM\Column(name="description", type="text")
      */
     private $description;
-    
-     /**
+
+    /**
      * @var string
      *
      * @ORM\Column(name="prerequis", type="text", nullable=true)
      */
     private $prerequis = 'Aucune connaissance spécifique n\'est requise pour commencer cette formation.';
-    
+
     /**
      * @var string
      *
@@ -58,9 +60,7 @@ class formation
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
-
     private $duree;
-    
     private $dureereel;
 
     /**
@@ -77,28 +77,18 @@ class formation
      */
     private $datecreation;
 
-        /**
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="datemodification", type="datetimetz", nullable=true)
      */
     private $datemodification;
-    
-    
-
 
     /**
      * @ORM\ManyToMany(targetEntity="lescad\platformeBundle\Entity\matiere",inversedBy="formations", cascade={"persist"})
      * 
      */
-     private $matieres;
-
-     /**
-     * @ORM\OneToOne(targetEntity="lescad\platformeBundle\Entity\Image", cascade={"persist", "remove"})
-     * 
-     */
-     private $image;
-
+    private $matieres;
 
     /**
      * @ORM\ManyToOne(targetEntity="lescad\platformeBundle\Entity\categorie", inversedBy="formations", cascade={"persist"})
@@ -107,14 +97,34 @@ class formation
      */
     private $categorie;
 
+    /**
+     * 
+     * @Vich\UploadableField(mapping="formation_image", fileNameProperty="nomImage", size="tailleImage")
+     * 
+     * @var File
+     */
+    private $fichierImage;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $nomImage;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     *
+     * @var integer
+     */
+    private $tailleImage;
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -125,8 +135,7 @@ class formation
      *
      * @return formation
      */
-    public function setNom($nom)
-    {
+    public function setNom($nom) {
         $this->nom = $nom;
 
         return $this;
@@ -137,8 +146,7 @@ class formation
      *
      * @return string
      */
-    public function getNom()
-    {
+    public function getNom() {
         return $this->nom;
     }
 
@@ -149,8 +157,7 @@ class formation
      *
      * @return formation
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
 
         return $this;
@@ -161,57 +168,42 @@ class formation
      *
      * @return string
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
-
 
     /**
      * Get duree
      *
      * @return int
      */
-    public function getDuree()
-    {
-        foreach($this->matieres as $matiere)
-        {
+    public function getDuree() {
+        foreach ($this->matieres as $matiere) {
             $this->duree += $matiere->getDuree();
         }
         return $this->duree;
     }
-    
-    
+
     /**
      * Get duree
      *
      * @return int
      */
-    public function getDureereel()
-    {
+    public function getDureereel() {
         //Nombre d'heure par jour = 4; Par semaine = 8
         $n = 4;
         $t = $this->getDuree();
-        if($t<=$n)
-        {
+        if ($t <= $n) {
             $this->dureereel = 'Une journée';
-        }
-        elseif($t<=(2*$n))
-        {
+        } elseif ($t <= (2 * $n)) {
             $this->dureereel = 'Une semaine';
-        }
-        elseif($t<=(4*$n))
-        {
+        } elseif ($t <= (4 * $n)) {
             $this->dureereel = 'Deux semaines';
-        }
-        elseif($t<=(6*$n))
-        {
+        } elseif ($t <= (6 * $n)) {
             $this->dureereel = 'Trois semaines';
-        }
-        elseif($t<417)
-        {
-            $q = intdiv($t, 8*$n)+1;
-            $this->dureereel = $q.' mois';
+        } elseif ($t < 417) {
+            $q = intdiv($t, 8 * $n) + 1;
+            $this->dureereel = $q . ' mois';
         }
         return $this->dureereel;
     }
@@ -223,8 +215,7 @@ class formation
      *
      * @return formation
      */
-    public function setActive($active)
-    {
+    public function setActive($active) {
         $this->active = $active;
 
         return $this;
@@ -235,8 +226,7 @@ class formation
      *
      * @return bool
      */
-    public function getActive()
-    {
+    public function getActive() {
         return $this->active;
     }
 
@@ -247,8 +237,7 @@ class formation
      *
      * @return formation
      */
-    public function setDatecreation($datecreation)
-    {
+    public function setDatecreation($datecreation) {
         $this->datecreation = $datecreation;
 
         return $this;
@@ -259,15 +248,14 @@ class formation
      *
      * @return \DateTime
      */
-    public function getDatecreation()
-    {
+    public function getDatecreation() {
         return $this->datecreation;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->matieres = new \Doctrine\Common\Collections\ArrayCollection();
         $this->datecreation = new \Datetime();
     }
@@ -279,8 +267,7 @@ class formation
      *
      * @return formation
      */
-    public function addMatiere(\lescad\platformeBundle\Entity\matiere $matiere)
-    {
+    public function addMatiere(\lescad\platformeBundle\Entity\matiere $matiere) {
         $this->matieres[] = $matiere;
 
         return $this;
@@ -291,8 +278,7 @@ class formation
      *
      * @param \lescad\platformeBundle\Entity\matiere $matiere
      */
-    public function removeMatiere(\lescad\platformeBundle\Entity\matiere $matiere)
-    {
+    public function removeMatiere(\lescad\platformeBundle\Entity\matiere $matiere) {
         $this->matieres->removeElement($matiere);
     }
 
@@ -301,8 +287,7 @@ class formation
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getMatieres()
-    {
+    public function getMatieres() {
         return $this->matieres;
     }
 
@@ -313,8 +298,7 @@ class formation
      *
      * @return formation
      */
-    public function setCategorie(\lescad\platformeBundle\Entity\categorie $categorie = null)
-    {
+    public function setCategorie(\lescad\platformeBundle\Entity\categorie $categorie = null) {
         $this->categorie = $categorie;
         $categorie->addFormation($this);
 
@@ -326,8 +310,7 @@ class formation
      *
      * @return \lescad\platformeBundle\Entity\categorie
      */
-    public function getCategorie()
-    {
+    public function getCategorie() {
         return $this->categorie;
     }
 
@@ -338,8 +321,7 @@ class formation
      *
      * @return formation
      */
-    public function setDatemodification($datemodification)
-    {
+    public function setDatemodification($datemodification) {
         $this->datemodification = $datemodification;
 
         return $this;
@@ -350,16 +332,14 @@ class formation
      *
      * @return \DateTime
      */
-    public function getDatemodification()
-    {
+    public function getDatemodification() {
         return $this->datemodification;
     }
 
     /**
      * @ORM\PreUpdate
      */
-    public function modifierDatemodification()
-    {
+    public function modifierDatemodification() {
         $this->setDatemodification(new \DateTime());
     }
 
@@ -370,8 +350,7 @@ class formation
      *
      * @return formation
      */
-    public function setSlug($slug)
-    {
+    public function setSlug($slug) {
         $this->slug = $slug;
 
         return $this;
@@ -382,8 +361,7 @@ class formation
      *
      * @return string
      */
-    public function getSlug()
-    {
+    public function getSlug() {
         return $this->slug;
     }
 
@@ -394,8 +372,7 @@ class formation
      *
      * @return formation
      */
-    public function setPrerequis($prerequis)
-    {
+    public function setPrerequis($prerequis) {
         $this->prerequis = $prerequis;
 
         return $this;
@@ -406,8 +383,7 @@ class formation
      *
      * @return string
      */
-    public function getPrerequis()
-    {
+    public function getPrerequis() {
         return $this->prerequis;
     }
 
@@ -418,8 +394,7 @@ class formation
      *
      * @return formation
      */
-    public function setCout($cout)
-    {
+    public function setCout($cout) {
         $this->cout = $cout;
 
         return $this;
@@ -430,32 +405,82 @@ class formation
      *
      * @return string
      */
-    public function getCout()
-    {
+    public function getCout() {
         return $this->cout;
     }
 
     /**
-     * Set image
+     * Set nomImage
      *
-     * @param \lescad\platformeBundle\Entity\Image $image
+     * @param string $nomImage
      *
      * @return formation
      */
-    public function setImage(\lescad\platformeBundle\Entity\Image $image = null)
-    {
-        $this->image = $image;
+    public function setNomImage($nomImage) {
+        $this->nomImage = $nomImage;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get nomImage
      *
-     * @return \lescad\platformeBundle\Entity\Image
+     * @return string
      */
-    public function getImage()
-    {
-        return $this->image;
+    public function getNomImage() {
+        return $this->nomImage;
     }
+
+    /**
+     * Set tailleImage
+     *
+     * @param integer $tailleImage
+     *
+     * @return formation
+     */
+    public function setTailleImage($tailleImage) {
+        $this->tailleImage = $tailleImage;
+
+        return $this;
+    }
+
+    /**
+     * Get tailleImage
+     *
+     * @return integer
+     */
+    public function getTailleImage() {
+        return $this->tailleImage;
+    }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return Product
+     */
+    public function setFichierImage(File $image = null) {
+        $this->fichierImage = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->datemodification = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getFichierImage() {
+        return $this->fichierImage;
+    }
+
 }

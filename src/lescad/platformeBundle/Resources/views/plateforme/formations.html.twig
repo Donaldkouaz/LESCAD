@@ -41,12 +41,13 @@
                     {% for formation in formations %}
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="my-list">
-                                {% if formation.image is null %}
-                                    <img src="http://hpservicecenterschennai.in/images/hp_laptop_service_centers_in_guindy.png" alt="dsadas" />
+                                {% if formation.nomImage %}
+                                    <img src="{{ vich_uploader_asset(formation, 'fichierImage') }}" alt="{{ formation.nom }}" />
+
                                 {% else %}
-                                    <img src="{{ asset(formation.image.lien) }}" alt="{{ formation.image.alt }}" />
+                                    <img src="http://hpservicecenterschennai.in/images/hp_laptop_service_centers_in_guindy.png" alt="dsadas" />
                                 {% endif %}
-                                <h3>{{ formation.nom }}</h3>
+                                <h3>{{ formation.nom|upper }}</h3>
                                 <span> Durée : {{ formation.dureereel }}</span>
                                 <span class="pull-right">{{ formation.cout }}</span>
                                 <div class="offer">{{ formation.categorie.nom }}</div>

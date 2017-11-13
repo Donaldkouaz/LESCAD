@@ -9,8 +9,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use lescad\platformeBundle\Form\ImageType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class FormatioAdmin extends AbstractAdmin {
 
@@ -32,7 +33,13 @@ class FormatioAdmin extends AbstractAdmin {
                     'multiple' => true,
                     'expanded' => false,
                 ))
-                ->add('image', ImageType::class)
+                ->add('fichierImage', VichImageType::class, [
+            'required' => false,
+            'allow_delete' => true,
+            'download_label' => '...',
+            'download_uri' => true,
+            'image_uri' => true,
+        ])
                 ->add('active', CheckboxType::class, array('required' => false));
     }
 
