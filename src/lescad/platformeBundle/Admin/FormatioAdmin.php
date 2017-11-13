@@ -40,6 +40,13 @@ class FormatioAdmin extends AbstractAdmin {
             'download_uri' => true,
             'image_uri' => true,
         ])
+                ->add('fichierBanniere', VichImageType::class, [
+            'required' => false,
+            'allow_delete' => true,
+            'download_label' => '...',
+            'download_uri' => true,
+            'image_uri' => true,
+        ])
                 ->add('active', CheckboxType::class, array('required' => false));
     }
 

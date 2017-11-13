@@ -160,3 +160,13 @@ vich_uploader:
                 inject_on_load:     true
                 delete_on_update:   true
                 delete_on_remove:   true
+            formation_banniere:
+                uri_prefix:         /lescad/web/images/formations/banniere
+                upload_destination: '%kernel.root_dir%/../web/images/formations/banniere'
+                namer:
+                    service: vich_uploader.namer_property
+                    options: { property: 'slug'}
+                
+                inject_on_load:     true
+                delete_on_update:   true
+                delete_on_remove:   true

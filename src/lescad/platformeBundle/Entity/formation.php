@@ -104,6 +104,14 @@ class formation {
      * @var File
      */
     private $fichierImage;
+    
+     /**
+     * 
+     * @Vich\UploadableField(mapping="formation_banniere", fileNameProperty="nomBanniere", size="tailleBanniere")
+     * 
+     * @var File
+     */
+    private $fichierBanniere;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -119,6 +127,21 @@ class formation {
      */
     private $tailleImage;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $nomBanniere;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     *
+     * @var integer
+     */
+    private $tailleBanniere;
+
+    
     /**
      * Get id
      *
@@ -482,5 +505,72 @@ class formation {
     public function getFichierImage() {
         return $this->fichierImage;
     }
+    
+        public function setFichierBanniere(File $image = null) {
+        $this->fichierBanniere = $image;
 
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->datemodification = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getFichierBanniere() {
+        return $this->fichierBanniere;
+    }
+
+
+    /**
+     * Set nomBanniere
+     *
+     * @param string $nomBanniere
+     *
+     * @return formation
+     */
+    public function setNomBanniere($nomBanniere)
+    {
+        $this->nomBanniere = $nomBanniere;
+
+        return $this;
+    }
+
+    /**
+     * Get nomBanniere
+     *
+     * @return string
+     */
+    public function getNomBanniere()
+    {
+        return $this->nomBanniere;
+    }
+
+    /**
+     * Set tailleBanniere
+     *
+     * @param integer $tailleBanniere
+     *
+     * @return formation
+     */
+    public function setTailleBanniere($tailleBanniere)
+    {
+        $this->tailleBanniere = $tailleBanniere;
+
+        return $this;
+    }
+
+    /**
+     * Get tailleBanniere
+     *
+     * @return integer
+     */
+    public function getTailleBanniere()
+    {
+        return $this->tailleBanniere;
+    }
 }

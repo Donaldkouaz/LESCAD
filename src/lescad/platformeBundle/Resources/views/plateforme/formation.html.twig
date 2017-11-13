@@ -4,24 +4,30 @@
     {{ formation.nom|upper }} - {{ parent() }}
 {% endblock %}
 {% block css %} 
-    {{ parent()}} <link href="{{asset('bundles/lescadplatforme/css/formations.css')}}" rel="stylesheet">
+    {{ parent()}} <link href="{{asset('bundles/lescadplatforme/css/formation.css')}}" rel="stylesheet">
 {% endblock %}
 
+{% block baniere %}
+        <div>
+            <img src="{{ vich_uploader_asset(formation, 'fichierBanniere') }}" alt="{{ formation.nom }}" style="width:100%; padding-top:51px; padding-bottom: 10px;">     
+        </div>
+    {% endblock %}
+
 {% block lescadplatforme_body %}
-    <div class="container-fluid">
+    <div class="container">
 
         <div class="row">
 
-            <div class="col-md-3 col-sm-4 prin">
+            {#<div class="col-md-3 col-sm-4 prin">
 
                 {% include "lescadplatformeBundle:plateforme:formations_categories.html.twig" %}
 
                 {% block userleft %}
                 {% endblock userleft %}
-            </div>
+            </div>#}
 
 
-            <div class="col-sm-8 col-md-6 prin">
+            <div class="col-sm-8 prin">
                 {#<h2 class="title">Parcourez toutes nos formations</h2>#}
 
 
@@ -39,15 +45,17 @@
                         <div class="well">
                             <h1 class="text-center"><b>{{ formation.nom|upper }}</b></h1><hr/>
 
-                            <p><h2>Description</h2><br/>{{ formation.description }}</p>
-                            <p><h2>Durée</h2><br/> Cette formation durera : {{ formation.dureereel }}.</p>
-                            <p><h2>Matières</h2><br/>
-                            {% for matiere in formation.matieres %}
-                                <h3>{{ matiere.nom }} ({{ matiere.duree }} heures)</h3><br/>
-                                <p>{{ matiere.description }}</p>
-                            {% endfor %}</p>
-                            <p><h2>Pré-réquis</h2><br/>{{ formation.prerequis }}</p>
-                            <p><h2>Cout</h2><br/> Le cout de cette formation est de : {{ formation.cout }}</p>
+                            <p>{{ formation.description }}</p>
+                            <p><strong>Durée : </strong>{{ formation.dureereel }}.</p>
+                            <p><strong>Matières : </strong>
+                            <ul>
+                                {% for matiere in formation.matieres %}
+                                    <li>{{ matiere.nom }} ({{ matiere.duree }} heures)</li>
+                                    {% endfor %}
+                            </ul>
+                            </p>
+                            <p><strong>Pré-réquis : </strong><br/>{{ formation.prerequis }}</p>
+                            <p><strong>Prix : </strong>{{ formation.cout }}</p>
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                 <div class="more label"><a href="{{ path('admin_lescad_platforme_formation_edit', { 'id': formation.id }) }}">Modifier</a></div> 
                             {% endif %}
@@ -58,7 +66,7 @@
             </div>
 
 
-            <div class="col-md-3 hidden-sm hidden-xs  prin">
+            <div class="col-sm-4 prin">
                 <div class="well">
                     <div class="page- text-center">
 
