@@ -6,7 +6,11 @@
 {% block css %} 
     {{ parent()}} <link href="{{asset('bundles/lescadplatforme/css/sss.css')}}" rel="stylesheet">
 {% endblock %}
-
+{% block baniere %}
+        <div>
+            <img src="{{ vich_uploader_asset(sss, 'fichierBanniere') }}" alt="{{ sss.nom }}" style="width:100%; padding-top:51px; padding-bottom: 10px;">     
+        </div>
+    {% endblock %}
 {% block lescadplatforme_body %}
     <div class="container-fluid">
 

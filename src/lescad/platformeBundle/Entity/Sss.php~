@@ -54,7 +54,7 @@ class Sss
 
    /**
      * 
-     * @Vich\UploadableField(mapping="sss_image", fileNameProperty="nomImage", size="tailleImage")
+     * @Vich\UploadableField(mapping="formation_image", fileNameProperty="nomImage", size="tailleImage")
      * 
      * @var File
      */
@@ -62,7 +62,7 @@ class Sss
     
      /**
      * 
-     * @Vich\UploadableField(mapping="sss_banniere", fileNameProperty="nomBanniere", size="tailleBanniere")
+     * @Vich\UploadableField(mapping="formation_banniere", fileNameProperty="nomBanniere", size="tailleBanniere")
      * 
      * @var File
      */
@@ -324,28 +324,4 @@ class Sss
         return $this->fichierBanniere;
     }
 
-
-    /**
-     * Set datemodification
-     *
-     * @param \DateTime $datemodification
-     *
-     * @return Sss
-     */
-    public function setDatemodification($datemodification)
-    {
-        $this->datemodification = $datemodification;
-
-        return $this;
-    }
-
-    /**
-     * Get datemodification
-     *
-     * @return \DateTime
-     */
-    public function getDatemodification()
-    {
-        return $this->datemodification;
-    }
 }

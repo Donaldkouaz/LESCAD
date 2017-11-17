@@ -170,3 +170,32 @@ vich_uploader:
                 inject_on_load:     true
                 delete_on_update:   true
                 delete_on_remove:   true
+            sss_image:
+                uri_prefix:         /lescad/web/images/soutien-scolaire
+                upload_destination: '%kernel.root_dir%/../web/images/soutien-scolaire'
+                namer:
+                    service: vich_uploader.namer_property
+                    options: { property: 'slug'}
+                
+                inject_on_load:     true
+                delete_on_update:   true
+                delete_on_remove:   true
+            sss_banniere:
+                uri_prefix:         /lescad/web/images/soutien-scolaire/banniere
+                upload_destination: '%kernel.root_dir%/../web/images/soutien-scolaire/banniere'
+                namer:
+                    service: vich_uploader.namer_property
+                    options: { property: 'slug'}
+                
+                inject_on_load:     true
+                delete_on_update:   true
+                delete_on_remove:   true
+                
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+        jsqueeze:   ~
+        scssphp:
+            formatter: 'Leafo\ScssPhp\Formatter\Compressed'

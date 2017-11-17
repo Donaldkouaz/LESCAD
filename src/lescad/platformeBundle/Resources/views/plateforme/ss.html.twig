@@ -1,40 +1,51 @@
 {% extends "lescadplatformeBundle::layout.html.twig" %}
 
 {% block titre %}
-   Soutiens Scolaire - {{ parent() }}
+    Soutiens Scolaire - {{ parent() }}
 {% endblock %}
 {% block css %} 
-{{ parent()}} <link href="{{asset('bundles/lescadplatforme/css/ss.css')}}" rel="stylesheet">
+    {{ parent()}} <link href="{{asset('bundles/lescadplatforme/css/ss.css')}}" rel="stylesheet">
 {% endblock %}
 
 {% block lescadplatforme_body %}
-<div class="container">
+    <div class="container">
 
-      <div class="row">
-        
-          {% if app.request.hasPreviousSession %}
-            {% for type, messages in app.session.flashbag.all() %}
-                {% for message in messages %}
-                    <div class="flash-{{ type }}">
-                        {{ message }}
-                    </div>
+        <div class="row">
+
+            {% if app.request.hasPreviousSession %}
+                {% for type, messages in app.session.flashbag.all() %}
+                    {% for message in messages %}
+                        <div class="flash-{{ type }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
-        {% endif %}
-        
-        <div class="page-header text-center">
-            <h1>Nos offres de soutiens scolaires</h1>
+            {% endif %}
+
+            <div class="page-header text-center">
+                <h1>Nos offres de soutiens scolaires</h1>
             </div>
-        {% for service in sss %}
-        <div class="col-md-4 col-sm-6 well">
-            <h2 class="text-center" ><a href="{{ path('lescadplatforme_sss', { 'sssSlug': service.slug }) }}">{{ service.nom }}</a></h2>
-            <p class="text-justify" >
-                {{ service.description|truncate(130, true, " ...") }}
-            </p>
-
-        </div>
-        {% endfor %}
-
-      </div>
-    </div>
-{% endblock %}
+            <div class="container">
+                <div class="row">
+                    {% for service in sss %}
+                        <div class="col-md-4 col-sm-6">
+                            <div class="single-blog-item">
+                                <div class="blog-thumnail">
+                                    {% if service.nomImage %}
+                                        <img src="{{ vich_uploader_asset(service, 'fichierImage') }}" alt="{{ service.nom }}" />
+                                    {% else %}
+                                        <img src="http://hpservicecenterschennai.in/images/hp_laptop_service_centers_in_guindy.png" alt="dsadas" />
+                                    {% endif %}
+                                    {# <a href=""><img src="http://via.placeholder.com/370x275" alt="blog-img"></a>#}
+                                </div>
+                                <div class="blog-content">
+                                    <h4><a href="{{ path('lescadplatforme_sss', { 'sssSlug': service.slug }) }}">{{ service.nom }}</a></h4>
+                                    <p>{{ service.description|truncate(130, true, " ...") }}</p>
+                                    <a href="{{ path('lescadplatforme_sss', { 'sssSlug': service.slug }) }}" class="more-btn">Détails</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endblock %}

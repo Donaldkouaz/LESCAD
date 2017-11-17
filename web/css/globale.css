@@ -1,11 +1,14 @@
+
+
 body
 {
-
+    font-family: 'Quicksand', sans-serif;
+    font-weight:700;
 }
 .page {
-	min-height:100vh; /* 1 */
-	display:flex; /* 2 */
-	flex-direction:column; /* 3 */
+    min-height:100vh; /* 1 */
+    display:flex; /* 2 */
+    flex-direction:column; /* 3 */
 }
 .content 
 {
@@ -34,8 +37,8 @@ body
 }
 .index-link h3{
     text-align:center;
-   color: green;
-   
+    color: green;
+
 }
 .index-link{
     background-color:#111;
@@ -47,15 +50,15 @@ body
     list-style-type:none;
 }
 .index-link ul li a{
-  text-decoration:none;
-  font-size:16px;
-  color:#fff;
-  display:block;
-  padding:5px 0;
-  text-align:center;
+    text-decoration:none;
+    font-size:16px;
+    color:#fff;
+    display:block;
+    padding:5px 0;
+    text-align:center;
 }
 .index-link ul li a:hover{
-     text-decoration:underline;
+    text-decoration:underline;
 }
 .copy-c{
     padding-top:15px;
@@ -93,7 +96,7 @@ Styles pour les boutons sociaux
 }
 
 .icon-circle  .fa:hover{
-    
+
     background-color        : #e84700;    
     color                   : #fff;
     border                  : 1px solid #e84711;
@@ -117,44 +120,44 @@ Styles pour les boutons sociaux
 @media (min-width:320px) and (max-width:768px) {
 
 
- .icon-circle .fa{
-    font-size           : 15px;
-    color               : #e84700;
-    margin              : 0 auto;
-    height              : 40px;
-    width               : 40px;
-    border-radius       : 50%;
-    border              :2px solid #e84700;
-    line-height         : 40px;
-    cursor              : pointer;
-    -webkit-transition  : all  ease-in-out 0.35s;
-    -moz-transition     : all  ease-in-out 0.35s;
-    -o-transition       : all  ease-in-out 0.35s;
-    -ms-transition      : all  ease-in-out 0.35s;
-    transition          : all  ease-in-out 0.20s,background-color ease-in-out 0.05s;
-}
+    .icon-circle .fa{
+        font-size           : 15px;
+        color               : #e84700;
+        margin              : 0 auto;
+        height              : 40px;
+        width               : 40px;
+        border-radius       : 50%;
+        border              :2px solid #e84700;
+        line-height         : 40px;
+        cursor              : pointer;
+        -webkit-transition  : all  ease-in-out 0.35s;
+        -moz-transition     : all  ease-in-out 0.35s;
+        -o-transition       : all  ease-in-out 0.35s;
+        -ms-transition      : all  ease-in-out 0.35s;
+        transition          : all  ease-in-out 0.20s,background-color ease-in-out 0.05s;
+    }
 
-.icon-circle  .fa:hover{
-    
-    background-color        : #e84700;    
-    color                   : #fff;
-    border                  : 1px solid #e84711;
-    -moz-box-shadow         : inset 0px 0px 0px 5px #ffffff;
-    -o-box-shadow           : inset 0px 0px 0px 5px #ffffff;
-    -ms-box-shadow          : inset 0px 0px 0px 5px #ffffff;
-    -webkit-box-shadow      : inset 0px 0px 0px 5px #ffffff;
-    box-shadow              : inset 0px 0px 0px 5px #ffffff;
-    -ms-transform           : scale(1.2,1.2); 
-    -webkit-transform       : scale(1.2,1.2);
-    -moz-transform          : scale(1.2,1.2); 
-    -o-transform            : scale(1.2,1.2); 
-    transform               : scale(1.2,1.2);  
-}
+    .icon-circle  .fa:hover{
 
-.icon-circle  i:before{
-    margin-left         : 0px;
-    font-size           : 20px;
-}   
+        background-color        : #e84700;    
+        color                   : #fff;
+        border                  : 1px solid #e84711;
+        -moz-box-shadow         : inset 0px 0px 0px 5px #ffffff;
+        -o-box-shadow           : inset 0px 0px 0px 5px #ffffff;
+        -ms-box-shadow          : inset 0px 0px 0px 5px #ffffff;
+        -webkit-box-shadow      : inset 0px 0px 0px 5px #ffffff;
+        box-shadow              : inset 0px 0px 0px 5px #ffffff;
+        -ms-transform           : scale(1.2,1.2); 
+        -webkit-transform       : scale(1.2,1.2);
+        -moz-transform          : scale(1.2,1.2); 
+        -o-transform            : scale(1.2,1.2); 
+        transform               : scale(1.2,1.2);  
+    }
+
+    .icon-circle  i:before{
+        margin-left         : 0px;
+        font-size           : 20px;
+    }   
 }
 
 .ifacebook .fa{
@@ -163,7 +166,7 @@ Styles pour les boutons sociaux
 }
 
 .ifacebook .fa:hover{
-    
+
     background-color        : #3B5998;    
     color                   : #fff;
     border                  : 1px solid #3B5998;
@@ -176,7 +179,7 @@ Styles pour les boutons sociaux
 }
 
 .itwittter .fa:hover{
-    
+
     background-color        : #33ccff;    
     color                   : #fff;
     border                  : 1px solid #33ccff;
@@ -189,7 +192,7 @@ Styles pour les boutons sociaux
 }
 
 .igoogle .fa:hover{
-    
+
     background-color        : #BD3518;    
     color                   : #fff;
     border                  : 1px solid #BD3518;
@@ -202,7 +205,7 @@ Styles pour les boutons sociaux
 }
 
 .iLinkedin .fa:hover{
-    
+
     background-color        :#007bb7;    
     color                   : #fff;
     border                  : 1px solid #007bb7;
@@ -211,7 +214,7 @@ Styles pour les boutons sociaux
 
 .prin
 {
-    
+
 }
 
 /* 
