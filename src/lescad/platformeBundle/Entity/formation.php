@@ -69,6 +69,13 @@ class formation {
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
+    
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="avant", type="boolean")
+     */
+    private $avant = false;
 
     /**
      * @var \DateTime
@@ -572,5 +579,29 @@ class formation {
     public function getTailleBanniere()
     {
         return $this->tailleBanniere;
+    }
+
+    /**
+     * Set avant
+     *
+     * @param boolean $avant
+     *
+     * @return formation
+     */
+    public function setAvant($avant)
+    {
+        $this->avant = $avant;
+
+        return $this;
+    }
+
+    /**
+     * Get avant
+     *
+     * @return boolean
+     */
+    public function getAvant()
+    {
+        return $this->avant;
     }
 }

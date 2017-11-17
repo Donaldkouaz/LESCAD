@@ -20,7 +20,12 @@ class PlatformeController extends Controller {
 
 //    Methode index pour la page d'accueil 
     public function indexAction() {
-        return $this->render('lescadplatformeBundle:plateforme:index.html.twig');
+        $sss = $this->getDoctrine()->getManager()->getRepository('lescadplatformeBundle:Sss')->findAll();
+        
+        $formations = $this->getDoctrine()->getManager()->getRepository('lescadplatformeBundle:formation')->findAllWithMatieres();
+        
+        return $this->render('lescadplatformeBundle:plateforme:index.html.twig', array('sss' => $sss,
+                    'formations' => $formations,));
     }
 
     public function servicesAction() {
@@ -56,7 +61,6 @@ class PlatformeController extends Controller {
         ));
     }
 
-       
     public function RecrutementAction(Request $request) {
 
         $demande = new DemandeRecrut();
@@ -115,7 +119,7 @@ class PlatformeController extends Controller {
     }
 
     public function formationsCatAction(Request $request, $categorie, $page) {
-        
+
 //        $demande = new DemandeCours();
 //        $form = $this->createForm(DemandeCoursType::class, $demande)->add('Envoyer la demande', SubmitType::class);
 //
@@ -128,7 +132,7 @@ class PlatformeController extends Controller {
 //
 //            return $this->redirectToRoute('lescadplatforme_services');
 //        }
-        
+
         $nbreParPage = 6;
         $categories = $this->getDoctrine()->getManager()->getRepository('lescadplatformeBundle:categorie')->findAllWithFormations();
 
@@ -162,7 +166,7 @@ class PlatformeController extends Controller {
 
         $demande = new DemandeCours();
         $for = $formation->getNom();
-       $message = 'Bonjour, je suis intérressé par la formation "'.$for.'" que vous proposez. Veuillez me recontacter, aux coordonnées indiquées. Je souhaite avoir plus d\'informations sur cette formation.';
+        $message = 'Bonjour, je suis intérressé par la formation "' . $for . '" que vous proposez. Veuillez me recontacter, aux coordonnées indiquées. Je souhaite avoir plus d\'informations sur cette formation.';
         $demande->setMessage($message);
         $form = $this->createForm(DemandeCoursType::class, $demande)->add('Envoyer la demande', SubmitType::class);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
@@ -171,7 +175,6 @@ class PlatformeController extends Controller {
             $em->flush();
 
             $request->getSession()->getFlashBag()->add('notice', 'Votre demande a bien été envoyé. Vous serez contacté tres bientot par un agent de votre région.');
-
         }
 
         return $this->render('lescadplatformeBundle:plateforme:formation.html.twig', array('formation' => $formation,
@@ -198,7 +201,7 @@ class PlatformeController extends Controller {
 
         $demande = new DemandeCours();
         $service = $sss->getNom();
-        $message = 'Bonjour, je suis interressé par votre service : '.$service.'. Veuillez me recontacter, aux coordonnées indiquées. Je souhaite avoir plus d\'informations sur ce service.';
+        $message = 'Bonjour, je suis interressé par votre service : ' . $service . '. Veuillez me recontacter, aux coordonnées indiquées. Je souhaite avoir plus d\'informations sur ce service.';
         $demande->setMessage($message);
         $form = $this->createForm(DemandeCoursType::class, $demande)->add('Envoyer la demande', SubmitType::class);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
@@ -216,8 +219,8 @@ class PlatformeController extends Controller {
                     'form' => $form->createView(),
         ));
     }
-    
-        public function ServiceClientAction(Request $request) {
+
+    public function ServiceClientAction(Request $request) {
 
         $demande = new ServiceClient();
         $form = $this->createForm(ServiceClientType::class, $demande)->add('Envoyer la requette', SubmitType::class);
@@ -230,15 +233,14 @@ class PlatformeController extends Controller {
             $request->getSession()->getFlashBag()->add('notice', 'Votre demande a bien été envoyé. Vous serez contacté tres bientot par un agent de votre région.');
 
             return $this->redirectToRoute('lescadplatforme_services');
-            
         }
-        
+
         return $this->render('lescadplatformeBundle:plateforme:serviceclient.html.twig', array(
                     'form' => $form->createView(),
         ));
     }
-        
-        public function SuggestionAction(Request $request) {
+
+    public function SuggestionAction(Request $request) {
 
         $demande = new Suggestion();
         $form = $this->createForm(SuggestionType::class, $demande)->add('Envoyer la suggestion', SubmitType::class);
@@ -257,4 +259,5 @@ class PlatformeController extends Controller {
                     'form' => $form->createView(),
         ));
     }
+
 }

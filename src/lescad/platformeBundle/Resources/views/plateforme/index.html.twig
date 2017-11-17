@@ -64,63 +64,6 @@
         <div class="row">
             <div class="callout-dark fade-in-b">
                 <div class="container">
-                    <h1> <b>FORMATIONS</b> </h1>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="single-blog-item">
-                    <div class="blog-thumnail">
-                        <a href=""><img src="http://via.placeholder.com/370x275" alt="blog-img"></a>
-                    </div>
-                    <div class="blog-content">
-                        <h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint expedita exercitationem nostrum, eligendi quis, esse quos atque in molestias animi.</p>
-                        <a href="" class="more-btn">View More</a>
-                    </div>
-                    <span class="blog-date">May 03, 2015</span>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6">
-                <div class="single-blog-item">
-                    <div class="blog-thumnail">
-                        <a href=""><img src="http://via.placeholder.com/370x275" alt="blog-img"></a>
-                    </div>
-                    <div class="blog-content">
-                        <h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint expedita exercitationem nostrum, eligendi quis, esse quos atque in molestias animi.</p>
-                        <a href="" class="more-btn">View More</a>
-                    </div>
-                    <span class="blog-date">June 03, 2015</span>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6">
-                <div class="single-blog-item">
-                    <div class="blog-thumnail">
-                        <a href=""><img src="http://via.placeholder.com/370x275" alt="blog-img"></a>
-                    </div>
-                    <div class="blog-content">
-                        <h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint expedita exercitationem nostrum, eligendi quis, esse quos atque in molestias animi.</p>
-                        <a href="" class="more-btn">View More</a>
-                    </div>
-                    <span class="blog-date">July 03, 2015</span>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="callout-dark fade-in-b">
-                <div class="container">
                     <h1> <b>SOUTIEN SCOLAIRE</b> </h1>
                 </div>
             </div>
@@ -128,49 +71,59 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="single-blog-item">
-                    <div class="blog-thumnail">
-                        <a href=""><img src="http://via.placeholder.com/370x275" alt="blog-img"></a>
+            {% for index, service in sss if index < 3  %}
+                <div class="col-md-4 col-sm-6">
+                    <div class="single-blog-item">
+                        <div class="blog-thumnail">
+                            {% if service.nomImage %}
+                                <img src="{{ vich_uploader_asset(service, 'fichierImage') }}" alt="{{ service.nom }}" />
+                            {% else %}
+                                <img src="http://hpservicecenterschennai.in/images/hp_laptop_service_centers_in_guindy.png" alt="dsadas" />
+                            {% endif %}
+                            {# <a href=""><img src="http://via.placeholder.com/370x275" alt="blog-img"></a>#}
+                        </div>
+                        <div class="blog-content">
+                            <h4><a href="{{ path('lescadplatforme_sss', { 'sssSlug': service.slug }) }}">{{ service.nom }}</a></h4>
+                            <p>{{ service.description|truncate(130, true, " ...") }}</p>
+                            <a href="{{ path('lescadplatforme_sss', { 'sssSlug': service.slug }) }}" class="more-btn">Détails</a>
+                        </div>
                     </div>
-                    <div class="blog-content">
-                        <h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint expedita exercitationem nostrum, eligendi quis, esse quos atque in molestias animi.</p>
-                        <a href="" class="more-btn">View More</a>
-                    </div>
-                    <span class="blog-date">May 03, 2015</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="callout-dark fade-in-b">
+                <div class="container">
+                    <h1> <b>FORMATIONS</b> </h1>
                 </div>
             </div>
-
-            <div class="col-md-4 col-sm-6">
-                <div class="single-blog-item">
-                    <div class="blog-thumnail">
-                        <a href=""><img src="http://via.placeholder.com/370x275" alt="blog-img"></a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for formation in formations if formation.avant %}
+                <div class="col-md-4 col-sm-6">
+                    <div class="single-blog-item">
+                        <div class="blog-thumnail">
+                            {% if formation.nomImage %}
+                                <img src="{{ vich_uploader_asset(formation, 'fichierImage') }}" alt="{{ formation.nom }}" />
+                            {% else %}
+                                <img src="http://hpservicecenterschennai.in/images/hp_laptop_service_centers_in_guindy.png" alt="dsadas" />
+                            {% endif %}
+                            {#<a href=""><img src="http://via.placeholder.com/370x275" alt="blog-img"></a>#}
+                        </div>
+                        <div class="blog-content">
+                            <h4><a href="{{ path('lescadplatforme_formation', { 'formationSlug': formation.slug }) }}">{{ formation.nom|upper }}</a></h4>
+                            <p>{{ formation.description|truncate(130, true, " ...") }}</p>
+                            <a href="{{ path('lescadplatforme_formation', { 'formationSlug': formation.slug }) }}" class="more-btn">Détails</a>
+                        </div>
+                        <span class="blog-date">{{ formation.dureereel }}</span>
                     </div>
-                    <div class="blog-content">
-                        <h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint expedita exercitationem nostrum, eligendi quis, esse quos atque in molestias animi.</p>
-                        <a href="" class="more-btn">View More</a>
-                    </div>
-                    <span class="blog-date">June 03, 2015</span>
                 </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6">
-                <div class="single-blog-item">
-                    <div class="blog-thumnail">
-                        <a href=""><img src="http://via.placeholder.com/370x275" alt="blog-img"></a>
-                    </div>
-                    <div class="blog-content">
-                        <h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint expedita exercitationem nostrum, eligendi quis, esse quos atque in molestias animi.</p>
-                        <a href="" class="more-btn">View More</a>
-                    </div>
-                    <span class="blog-date">July 03, 2015</span>
-                </div>
-            </div>
-
-
+            {% endfor %}
         </div>
     </div>
 

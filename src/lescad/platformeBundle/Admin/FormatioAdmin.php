@@ -47,7 +47,8 @@ class FormatioAdmin extends AbstractAdmin {
             'download_uri' => true,
             'image_uri' => true,
         ])
-                ->add('active', CheckboxType::class, array('required' => false));
+                ->add('active', CheckboxType::class, array('required' => false))
+                ->add('avant', CheckboxType::class, array('required' => false));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
@@ -62,7 +63,8 @@ class FormatioAdmin extends AbstractAdmin {
         $listMapper->addIdentifier('nom')
                 ->add('description')
                 ->add('categorie.nom')
-                ->add('active');
+                ->add('active')
+                ->add('avant');
     }
 
 }
