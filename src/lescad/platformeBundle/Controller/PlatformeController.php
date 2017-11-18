@@ -20,11 +20,15 @@ class PlatformeController extends Controller {
 
 //    Methode index pour la page d'accueil 
     public function indexAction() {
+
+        $carousel = $this->getDoctrine()->getManager()->getRepository('lescadplatformeBundle:carousel')->findAll();
+
         $sss = $this->getDoctrine()->getManager()->getRepository('lescadplatformeBundle:Sss')->findAll();
-        
+
         $formations = $this->getDoctrine()->getManager()->getRepository('lescadplatformeBundle:formation')->findAllWithMatieres();
-        
+
         return $this->render('lescadplatformeBundle:plateforme:index.html.twig', array('sss' => $sss,
+                    'carousel' => $carousel,
                     'formations' => $formations,));
     }
 

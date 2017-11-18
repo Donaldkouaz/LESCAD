@@ -64,4 +64,11 @@ services:
             - { name: sonata.admin, manager_type: orm, group: admin, label: matiere }
         public: true
         
+    lescadplatforme.admin.carousel:
+        class: lescad\platformeBundle\Admin\CarouselAdmin
+        arguments: [~, lescad\platformeBundle\Entity\carousel, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Carousel }
+        public: true
+        
     

@@ -190,6 +190,16 @@ vich_uploader:
                 inject_on_load:     true
                 delete_on_update:   true
                 delete_on_remove:   true
+            carousel:
+                uri_prefix:         /lescad/web/images/carousel
+                upload_destination: '%kernel.root_dir%/../web/images/carousel'
+                namer:
+                    service: vich_uploader.namer_property
+                    options: { property: 'titre'}
+                
+                inject_on_load:     true
+                delete_on_update:   true
+                delete_on_remove:   true
                 
 assetic:
     debug:          '%kernel.debug%'

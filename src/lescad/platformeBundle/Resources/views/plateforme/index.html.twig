@@ -14,30 +14,18 @@
 
     <div class="container-fluid ca">
         <!-- Indicators -->
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="http://synicsys.com/wp-content/uploads/2014/08/seo-banner-bgd.jpg" alt="Chania">
-                    <div class="carousel-caption">
-                        <h3>Header of Slide 1</h3>
-                        {#<p>Details of Slide 1. Lorem Ipsum Blah Blah Blah....</p>#}
+                {% for wrapper in carousel if wrapper.active %}
+                    <div class="item {% if loop.first %} active {% endif %}">
+                        <img src="{{ vich_uploader_asset(wrapper, 'fichier') }}" alt="{{ wrapper.titre }}" />
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>{{ wrapper.titre }}</h3>
+                            <p>{{ wrapper.description }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <img src="http://allpoints.ph/wp-content/uploads/2013/10/banner.jpg" alt="Chania">
-                    <div class="carousel-caption">
-                        <h3>Header of Slide 2</h3>
-                        <p>Details of Slide 2. Lorem Ipsum Blah Blah Blah....</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="http://www.nimble-solution.com/images/slider/banner4.png" alt="Flower">
-                    <div class="carousel-caption">
-                        <h3>Header of Slide3</h3>
-                        <p>Details of Slide 3. Lorem Ipsum Blah Blah Blah....</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             <!-- Left and right controls -->
             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
