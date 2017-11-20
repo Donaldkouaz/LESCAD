@@ -215,7 +215,7 @@ class formation {
     }
 
     /**
-     * Get duree
+     * Get dureereel
      *
      * @return int
      */

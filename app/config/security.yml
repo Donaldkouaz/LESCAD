@@ -7,6 +7,9 @@ security:
   role_hierarchy:
     ROLE_ADMIN:       ROLE_USER
     ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+    ROLE_ACA: [ROLE_CSF, ROLE_CSSS]
+    ROLE_CA: ROLE_ACA
+    
 
   providers:
     main:
@@ -30,4 +33,7 @@ security:
         secret:     secret
 
   access_control:
-    #- { path: ^/admin, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN], requires_channel: https }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: ROLE_CA }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_CA }

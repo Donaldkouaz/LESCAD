@@ -107,7 +107,7 @@ fos_user:
             from_email: # Use this node only if you don't want the global email address for the confirmation email
                 address:        "%mailer_user%"
                 sender_name:    "LESCAD"
-            enabled:    true # change to true for required email confirmation
+            enabled:    false # change to true for required email confirmation
             template:   '@FOSUser/Registration/email.txt.twig'
         form:
             type:               FOS\UserBundle\Form\Type\RegistrationFormType # or 'fos_user_registration' on Symfony < 2.8

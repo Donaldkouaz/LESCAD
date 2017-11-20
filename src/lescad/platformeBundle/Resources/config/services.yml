@@ -70,5 +70,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Carousel }
         public: true
-        
-    
+
+    lescadplatforme.admin.role:
+        class: lescad\platformeBundle\Admin\RoleAdmin
+        arguments: [~, lescad\platformeBundle\Entity\Role, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Role }
+        public: true

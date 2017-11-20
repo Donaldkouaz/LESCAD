@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="`user`")
  * @ORM\Entity(repositoryClass="lescad\userBundle\Repository\userRepository")
- * @ORM\HasLifecycleCallbacks()
  */
 class user extends BaseUser
 {
@@ -98,27 +97,11 @@ class user extends BaseUser
      * 
      */
     protected $type;
-    
-     /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function definirRoles() {
-        $this->setRoles(array());
-        $roles = $this->getType();
-        foreach ($roles as $role) {
-            $nom = $role->getNomRole();
-            $this->addRole($nom);
-        }
-
-        return $this;
-    }
 
     /**
      * Constructor
      */
     public function __construct() {
-        parent::__construct();
         $this->type = new \Doctrine\Common\Collections\ArrayCollection();
         $this->datecreation = new \Datetime();
     }
@@ -349,7 +332,6 @@ class user extends BaseUser
     public function addType(\lescad\platformeBundle\Entity\Role $type)
     {
         $this->type[] = $type;
-//        $type->addUser($this);
 
         return $this;
     }
@@ -362,7 +344,6 @@ class user extends BaseUser
     public function removeType(\lescad\platformeBundle\Entity\Role $type)
     {
         $this->type->removeElement($type);
-//        $type->removeUser($this);
     }
 
     /**
@@ -373,29 +354,5 @@ class user extends BaseUser
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Set datecreation
-     *
-     * @param \DateTime $datecreation
-     *
-     * @return user
-     */
-    public function setDatecreation($datecreation)
-    {
-        $this->datecreation = $datecreation;
-
-        return $this;
-    }
-
-    /**
-     * Get datecreation
-     *
-     * @return \DateTime
-     */
-    public function getDatecreation()
-    {
-        return $this->datecreation;
     }
 }
