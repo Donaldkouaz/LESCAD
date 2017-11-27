@@ -35,11 +35,11 @@ class Role
      */
     private $nomRole;
     
-    /**
-     * @ORM\ManyToMany(targetEntity="lescad\userBundle\Entity\user",mappedBy="type", cascade={"persist"})
-     * 
-     */
-     private $user;
+//    /**
+//     * @ORM\ManyToMany(targetEntity="lescad\userBundle\Entity\user",mappedBy="type", cascade={"persist"})
+//     * 
+//     */
+//     private $user;
 
 
     /**
