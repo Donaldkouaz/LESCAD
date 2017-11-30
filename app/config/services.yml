@@ -14,6 +14,6 @@ services:
         # if you need to do this, you can override this setting on individual services
         public: false
         
-    
-
+    security.acl.permission.map:
+      class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
 
