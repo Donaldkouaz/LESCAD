@@ -173,4 +173,9 @@ class Pays
     {
         return $this->departements;
     }
+    
+    public function __toString()
+    {
+        return $this->getNom() ?: '';
+    }
 }

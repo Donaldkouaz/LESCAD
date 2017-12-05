@@ -604,4 +604,9 @@ class formation {
     {
         return $this->avant;
     }
+    
+    public function __toString()
+    {
+        return $this->getNom() ?: '';
+    }
 }

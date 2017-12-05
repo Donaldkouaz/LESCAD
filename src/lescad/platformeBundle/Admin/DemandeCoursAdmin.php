@@ -7,9 +7,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class VilleAdmin extends AbstractAdmin
+class DemandeCoursAdmin extends AbstractAdmin
 {
     /**
      * @param DatagridMapper $datagridMapper
@@ -17,7 +16,18 @@ class VilleAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('contactee')
+            ->add('message')
             ->add('nom')
+            ->add('prenom')
+            ->add('ville', null, array(), 'entity', array(
+                'class'    => 'lescadplatformeBundle:Ville',
+                'choice_label' => 'nom',
+            ))
+            ->add('departement', null, array(), 'entity', array(
+                'class'    => 'lescadplatformeBundle:Departement',
+                'choice_label' => 'nom',
+            ))
         ;
     }
 
@@ -28,7 +38,12 @@ class VilleAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('nom')
-            ->add('departement.nom')
+            ->add('prenom')
+            ->add('ville.nom')
+            ->add('telephone')
+            ->add('message')
+            ->add('datedemande')
+            ->add('contactee')
             ->add('_action', null, array(
                 'actions' => array(
                     'show' => array(),
@@ -43,13 +58,7 @@ class VilleAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('nom')
-            ->add('departement', EntityType::class, array(
-            'class'   => 'lescadplatformeBundle:Departement',
-            'choice_label'    => 'nom',
-            'multiple' => false,
-            'expanded' => false,
-        ));
+            ->add('contactee')
         ;
     }
 
@@ -60,6 +69,13 @@ class VilleAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('nom')
+            ->add('prenom')
+            ->add('ville.nom')    
+            ->add('telephone')
+            ->add('message')
+            ->add('datedemande')
+            ->add('contactee')
+            
         ;
     }
 }

@@ -17,6 +17,7 @@ class matiereAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('nom')
+            ->add('description')
             ->add('duree')
             ->add('active')
         ;
@@ -59,10 +60,8 @@ class matiereAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('nom')
             ->add('description')
-            ->add('slug')
             ->add('duree')
             ->add('active')
             ->add('datecreation')

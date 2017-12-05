@@ -7,6 +7,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class formationAdmin extends AbstractAdmin
 {
@@ -16,13 +18,12 @@ class formationAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
             ->add('nom')
             ->add('description')
-            ->add('slug')
+            ->add('prerequis')
+            ->add('cout')
             ->add('active')
-            ->add('datecreation')
-            ->add('datemodification')
+            ->add('avant')
         ;
     }
 
@@ -32,18 +33,14 @@ class formationAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
-            ->add('nom')
+            ->addIdentifier('nom')
             ->add('description')
-            ->add('slug')
+            ->add('cout')
             ->add('active')
-            ->add('datecreation')
-            ->add('datemodification')
+            ->add('avant')
             ->add('_action', null, array(
                 'actions' => array(
                     'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
                 ),
             ))
         ;
@@ -55,13 +52,50 @@ class formationAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
+        ->tab('Formation')
+          ->with('Formation', array('class' => 'col-md-9'))
             ->add('nom')
             ->add('description')
-            ->add('slug')
+            ->add('prerequis')
+            ->add('cout')
+          ->end()
+          ->with('Configuration', array('class' => 'col-md-3'))
             ->add('active')
-            ->add('datecreation')
-            ->add('datemodification')
+            ->add('avant')
+            ->add('categorie', EntityType::class, array(
+                    'class' => 'lescadplatformeBundle:categorie',
+                    'choice_label' => 'nom',
+                    'multiple' => false,
+                    'expanded' => false,
+                ))
+                ->add('matieres', EntityType::class, array(
+                    'class' => 'lescadplatformeBundle:matiere',
+                    'choice_label' => 'nom',
+                    'multiple' => true,
+                    'expanded' => false,
+                ))
+          ->end()
+        ->end()
+        ->tab('Images')
+          ->with('Prévisualisation', array('class' => 'col-md-6'))
+                ->add('fichierImage', VichImageType::class, [
+            'required' => false,
+            'allow_delete' => true,
+            'download_label' => '...',
+            'download_uri' => true,
+            'image_uri' => true,
+        ])
+          ->end()
+          ->with('Bannière', array('class' => 'col-md-6'))
+                ->add('fichierBanniere', VichImageType::class, [
+            'required' => false,
+            'allow_delete' => true,
+            'download_label' => '...',
+            'download_uri' => true,
+            'image_uri' => true,
+        ])
+          ->end()
+        ->end()
         ;
     }
 
@@ -71,11 +105,12 @@ class formationAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id')
             ->add('nom')
             ->add('description')
-            ->add('slug')
+            ->add('prerequis')
+            ->add('cout')
             ->add('active')
+            ->add('avant')
             ->add('datecreation')
             ->add('datemodification')
         ;

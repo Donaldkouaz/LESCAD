@@ -142,4 +142,9 @@ class Ville
     {
         return $this->demandeCours;
     }
+    
+    public function __toString()
+    {
+        return $this->getNom() ?: '';
+    }
 }

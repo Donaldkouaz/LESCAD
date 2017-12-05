@@ -348,4 +348,9 @@ class Sss
     {
         return $this->datemodification;
     }
+    
+    public function __toString()
+    {
+        return $this->getNom() ?: '';
+    }
 }

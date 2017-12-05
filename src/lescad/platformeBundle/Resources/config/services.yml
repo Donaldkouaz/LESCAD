@@ -2,78 +2,140 @@ services:
 #    lescadplatforme.example:
 #        class: lescad\platformeBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+#    lescadplatforme.admin.formation:
+#        class: lescad\platformeBundle\Admin\formationAdmin
+#        arguments: [~, lescad\platformeBundle\Entity\formation, SonataAdminBundle:CRUD]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: admin, label: formation }
+#        public: true
+#    admin.categorie:
+#        class: lescad\platformeBundle\Admin\CategorieAdmin
+#        arguments: [~, lescad\platformeBundle\Entity\categorie, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Categorie }
+#        public: true
+#        
+#    admin.formation:
+#        class: lescad\platformeBundle\Admin\FormatioAdmin
+#        arguments: [~, lescad\platformeBundle\Entity\formation, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Formation }
+#        public: true
+#        
+#    admin.sss:
+#        class: lescad\platformeBundle\Admin\SssAdmin
+#        arguments: [~, lescad\platformeBundle\Entity\Sss, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: 'Soutien Scolaire', label: Soutien-Scolaire-Service }
+#        public: true
+#        
+#    admin.ville:
+#        class: lescad\platformeBundle\Admin\VilleAdmin
+#        arguments: [~, lescad\platformeBundle\Entity\Ville, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Ville }
+#        public: true
+#        
+#    admin.departement:
+#        class: lescad\platformeBundle\Admin\DepartementAdmin
+#        arguments: [~, lescad\platformeBundle\Entity\Departement, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Departement }
+#        public: true
+#        
+#    admin.pays:
+#        class: lescad\platformeBundle\Admin\PaysAdmin
+#        arguments: [~, lescad\platformeBundle\Entity\Pays, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Pays }
+#        public: true
+#
+#    admin.demandes:
+#        class: lescad\platformeBundle\Admin\DemandesServiceAdmin
+#        arguments: [~, lescad\platformeBundle\Entity\DemandeCours, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Demandes-Service }
+#        public: true
+#
+#    lescadplatforme.admin.matiere:
+#        class: lescad\platformeBundle\Admin\matiereAdmin
+#        arguments: [~, lescad\platformeBundle\Entity\matiere, SonataAdminBundle:CRUD]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: admin, label: matiere }
+#        public: true
+#        
+#    lescadplatforme.admin.carousel:
+#        class: lescad\platformeBundle\Admin\CarouselAdmin
+#        arguments: [~, lescad\platformeBundle\Entity\carousel, SonataAdminBundle:CRUD]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: admin, label: Carousel }
+#        public: true
+#
+#    lescadplatforme.admin.role:
+#        class: lescad\platformeBundle\Admin\RoleAdmin
+#        arguments: [~, lescad\platformeBundle\Entity\Role, SonataAdminBundle:CRUD]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: admin, label: Role }
+#        public: true
+    lescadplatforme.admin.carousel:
+        class: lescad\platformeBundle\Admin\carouselAdmin
+        arguments: [~, lescad\platformeBundle\Entity\carousel, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Page d'accueil", label: carousel }
+        public: true
+
+    lescadplatforme.admin.categorie:
+        class: lescad\platformeBundle\Admin\categorieAdmin
+        arguments: [~, lescad\platformeBundle\Entity\categorie, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Formations, label: categorie }
+        public: true
+
+    lescadplatforme.admin.demande_cours:
+        class: lescad\platformeBundle\Admin\DemandeCoursAdmin
+        arguments: [~, lescad\platformeBundle\Entity\DemandeCours, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Service client", label: DemandeCours }
+        public: true
+
+    lescadplatforme.admin.departement:
+        class: lescad\platformeBundle\Admin\DepartementAdmin
+        arguments: [~, lescad\platformeBundle\Entity\Departement, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Lieux, label: Departement }
+        public: true
+
     lescadplatforme.admin.formation:
         class: lescad\platformeBundle\Admin\formationAdmin
         arguments: [~, lescad\platformeBundle\Entity\formation, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: formation }
-        public: true
-    admin.categorie:
-        class: lescad\platformeBundle\Admin\CategorieAdmin
-        arguments: [~, lescad\platformeBundle\Entity\categorie, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Categorie }
-        public: true
-        
-    admin.formation:
-        class: lescad\platformeBundle\Admin\FormatioAdmin
-        arguments: [~, lescad\platformeBundle\Entity\formation, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Formation }
-        public: true
-        
-    admin.sss:
-        class: lescad\platformeBundle\Admin\SssAdmin
-        arguments: [~, lescad\platformeBundle\Entity\Sss, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: 'Soutien Scolaire', label: Soutien-Scolaire-Service }
-        public: true
-        
-    admin.ville:
-        class: lescad\platformeBundle\Admin\VilleAdmin
-        arguments: [~, lescad\platformeBundle\Entity\Ville, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Ville }
-        public: true
-        
-    admin.departement:
-        class: lescad\platformeBundle\Admin\DepartementAdmin
-        arguments: [~, lescad\platformeBundle\Entity\Departement, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Departement }
-        public: true
-        
-    admin.pays:
-        class: lescad\platformeBundle\Admin\PaysAdmin
-        arguments: [~, lescad\platformeBundle\Entity\Pays, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Pays }
+            - { name: sonata.admin, manager_type: orm, group: Formations, label: formation }
         public: true
 
-    admin.demandes:
-        class: lescad\platformeBundle\Admin\DemandesServiceAdmin
-        arguments: [~, lescad\platformeBundle\Entity\DemandeCours, ~]
+    lescadplatforme.admin.pays:
+        class: lescad\platformeBundle\Admin\PaysAdmin
+        arguments: [~, lescad\platformeBundle\Entity\Pays, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Demandes-Service }
+            - { name: sonata.admin, manager_type: orm, group: Lieux, label: Pays }
+        public: true
+
+    lescadplatforme.admin.sss:
+        class: lescad\platformeBundle\Admin\SssAdmin
+        arguments: [~, lescad\platformeBundle\Entity\Sss, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Soutiens Scolaires", label: Services }
+        public: true
+
+    lescadplatforme.admin.ville:
+        class: lescad\platformeBundle\Admin\VilleAdmin
+        arguments: [~, lescad\platformeBundle\Entity\Ville, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Lieux, label: Ville }
         public: true
 
     lescadplatforme.admin.matiere:
         class: lescad\platformeBundle\Admin\matiereAdmin
         arguments: [~, lescad\platformeBundle\Entity\matiere, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: matiere }
-        public: true
-        
-    lescadplatforme.admin.carousel:
-        class: lescad\platformeBundle\Admin\CarouselAdmin
-        arguments: [~, lescad\platformeBundle\Entity\carousel, SonataAdminBundle:CRUD]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Carousel }
-        public: true
-
-    lescadplatforme.admin.role:
-        class: lescad\platformeBundle\Admin\RoleAdmin
-        arguments: [~, lescad\platformeBundle\Entity\Role, SonataAdminBundle:CRUD]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Role }
+            - { name: sonata.admin, manager_type: orm, group: Formations, label: matiere }
         public: true

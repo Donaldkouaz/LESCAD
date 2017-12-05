@@ -280,5 +280,10 @@ class carousel
     public function getFichier() {
         return $this->fichier;
     }
+    
+    public function __toString()
+    {
+        return $this->getTitre() ?: '';
+    }
 }
 

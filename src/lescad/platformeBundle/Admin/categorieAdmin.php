@@ -7,9 +7,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class VilleAdmin extends AbstractAdmin
+class categorieAdmin extends AbstractAdmin
 {
     /**
      * @param DatagridMapper $datagridMapper
@@ -18,6 +17,8 @@ class VilleAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('nom')
+            ->add('description')
+            ->add('active')
         ;
     }
 
@@ -28,7 +29,8 @@ class VilleAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('nom')
-            ->add('departement.nom')
+            ->add('description')
+            ->add('active')
             ->add('_action', null, array(
                 'actions' => array(
                     'show' => array(),
@@ -44,12 +46,8 @@ class VilleAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('nom')
-            ->add('departement', EntityType::class, array(
-            'class'   => 'lescadplatformeBundle:Departement',
-            'choice_label'    => 'nom',
-            'multiple' => false,
-            'expanded' => false,
-        ));
+            ->add('description')
+            ->add('active')
         ;
     }
 
@@ -60,6 +58,8 @@ class VilleAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('nom')
+            ->add('description')
+            ->add('active')
         ;
     }
 }

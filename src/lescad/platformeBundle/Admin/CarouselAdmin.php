@@ -1,43 +1,74 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace lescad\platformeBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Vich\UploaderBundle\Form\Type\VichImageType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-class CarouselAdmin extends AbstractAdmin {
+class carouselAdmin extends AbstractAdmin
+{
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('active')
+        ;
+    }
 
-    protected function configureFormFields(FormMapper $formMapper) {
-        $formMapper->add('titre', 'text')
-                ->add('description', 'textarea')
-                ->add('fichier', VichImageType::class, [
+    /**
+     * @param ListMapper $listMapper
+     */
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->addIdentifier('titre')
+            ->add('description')
+            ->add('active')
+            ->add('_action', null, array(
+                'actions' => array(
+                    'show' => array(),
+                ),
+            ))
+        ;
+    }
+
+    /**
+     * @param FormMapper $formMapper
+     */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('titre')
+            ->add('description')
+            ->add('active')
+            ->add('fichier', VichImageType::class, [
                     'required' => false,
                     'allow_delete' => true,
-                    'download_label' => '...',
-                    'download_uri' => true,
+                    'download_uri' => false,
                     'image_uri' => true,
                 ])
-                ->add('active', CheckboxType::class, array('required' => false));
+        ;
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper) {
-        $datagridMapper->add('titre');
+    /**
+     * @param ShowMapper $showMapper
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->add('nom')
+            ->add('taille')
+            ->add('titre')
+            ->add('description')
+            ->add('datecreation')
+            ->add('datemodification')
+            ->add('active')
+        ;
     }
-
-    protected function configureListFields(ListMapper $listMapper) {
-        $listMapper->addIdentifier('titre')
-                ->add('description')
-                ->add('active');
-    }
-
 }

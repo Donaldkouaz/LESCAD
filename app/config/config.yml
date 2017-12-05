@@ -155,6 +155,8 @@ sonata_block:
         sonata.user.block.menu:    # used to display the menu in profile pages
         sonata.user.block.account: # used to display menu option (login option)
         sonata.block.service.text: # used to if you plan to use Sonata user routes
+        sonata.admin.block.search_result:
+            contexts: [admin]
             
 sonata_user:
     security_acl:           true
@@ -241,6 +243,9 @@ sonata_user:
 
 
 sonata_admin:
+    templates:
+        search:              SonataAdminBundle:Core:search.html.twig
+        search_result_block: SonataAdminBundle:Block:block_search_result.html.twig
     title:      LESCAD
 #    title_logo: /bundles/lescadplatforme/images/logo1.png
     security:
