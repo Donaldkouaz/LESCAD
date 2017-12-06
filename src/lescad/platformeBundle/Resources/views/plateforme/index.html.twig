@@ -19,7 +19,7 @@
             <div class="carousel-inner" role="listbox">
                 {% for wrapper in carousel if wrapper.active %}
                     <div class="item {% if loop.first %} active {% endif %}">
-                        <img src="{{ vich_uploader_asset(wrapper, 'fichier') }}" alt="{{ wrapper.titre }}" />
+                        <img src="{{ vich_uploader_asset(wrapper, 'fichier')| imagine_filter ( 'ban3' ) }}" alt="{{ wrapper.titre }}" />
                         <div class="carousel-caption d-none d-md-block">
                             <h3>{{ wrapper.titre }}</h3>
                             <p>{{ wrapper.description }}</p>

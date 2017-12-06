@@ -5,16 +5,16 @@ security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
 
-    acl:
-        connection: default
+#    acl:
+#        connection: default
         
     role_hierarchy:
         ROLE_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN]
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH, ROLE_CA]
         ROLE_ACA: [ROLE_CSF, ROLE_CSSS, ROLE_ADMIN]
         ROLE_CA: ROLE_ACA
-#        SONATA:
-#            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT  # if you are using acl then this line must be commented
+        SONATA:
+            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT  
 
     providers:
         fos_userbundle:

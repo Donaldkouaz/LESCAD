@@ -9,7 +9,7 @@
 
 {% block baniere %}
         <div>
-            <img src="{{ vich_uploader_asset(formation, 'fichierBanniere') }}" alt="{{ formation.nom }}" style="width:100%; padding-top:51px; padding-bottom: 10px;">     
+            <img src="{{ vich_uploader_asset(formation, 'fichierBanniere')| imagine_filter ( 'ban4' ) }}" alt="{{ formation.nom }}" style="width:100%; padding-top:51px; padding-bottom: 10px;">     
         </div>
     {% endblock %}
 

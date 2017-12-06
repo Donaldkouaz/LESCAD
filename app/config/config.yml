@@ -159,7 +159,7 @@ sonata_block:
             contexts: [admin]
             
 sonata_user:
-    security_acl:           true
+    security_acl:           false
 
     manager_type: orm # Can be orm or mongodb
 
@@ -249,24 +249,23 @@ sonata_admin:
     title:      LESCAD
 #    title_logo: /bundles/lescadplatforme/images/logo1.png
     security:
-        handler: sonata.admin.security.handler.acl
+        handler: sonata.admin.security.handler.role
 
 #        role_admin: ROLE_ADMIN
 #        role_super_admin: ROLE_SUPER_ADMIN
-
-        # acl security information
-        information:
-            GUEST:    [VIEW, LIST]
-            STAFF:    [EDIT, LIST, CREATE]
-            EDITOR:   [OPERATOR, EXPORT]
-            ADMIN:    [MASTER]
-
-        # permissions not related to an object instance and also to be available when objects do not exist
-        # the DELETE admin permission means the user is allowed to batch delete objects
-        admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
-
-        # permission related to the objects
-        object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
+#        # acl security information
+#        information:
+#            GUEST:    [VIEW, LIST]
+#            STAFF:    [EDIT, LIST, CREATE]
+#            EDITOR:   [OPERATOR, EXPORT]
+#            ADMIN:    [MASTER]
+#
+#        # permissions not related to an object instance and also to be available when objects do not exist
+#        # the DELETE admin permission means the user is allowed to batch delete objects
+#        admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+#
+#        # permission related to the objects
+#        object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
    
 vich_uploader:
         db_driver: orm
@@ -330,3 +329,47 @@ assetic:
         jsqueeze:   ~
         scssphp:
             formatter: 'Leafo\ScssPhp\Formatter\Compressed'
+
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
+    loaders:
+        default:
+            filesystem:
+                data_root: "%kernel.root_dir%/../.."
+
+    filter_sets:
+        cache: ~
+
+        # the name of the "filter set"
+        ban3:
+
+            # list of transformations to apply (the "filters")
+            filters:
+
+                watermark :
+
+                    # path to the watermark file (prepended with "%kernel.root_dir%")
+                    image : ../web/images/logos/logo3.png
+
+                    # size of the water mark relative to the input image
+                    size : 0.5
+
+                    # set the position of the watermark
+                    position : topleft
+        ban4:
+
+            # list of transformations to apply (the "filters")
+            filters:
+
+                watermark :
+
+                    # path to the watermark file (prepended with "%kernel.root_dir%")
+                    image : ../web/images/logos/logo4.png
+
+                    # size of the water mark relative to the input image
+                    size : 0.5
+
+                    # set the position of the watermark
+                    position : topleft
