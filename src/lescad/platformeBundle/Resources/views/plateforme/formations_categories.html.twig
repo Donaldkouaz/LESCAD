@@ -5,7 +5,7 @@
             <li><a href="#">Aucune Catégorie active pour le moment</a></li>
             {% else %}
                 {% for cat in categories %}
-                <li {% if categorie is defined and cat.slug == categorie %} class="active" {% endif %}><a href="{{ path('lescadplatforme_formations_categorie', { 'categorie': cat.slug }) }}">{{ cat.nom }} ({{cat.formations|length}})</a></li>
+                <li {% if categorie is defined and cat.slug == categorie %} class="active" {% endif %}><a href="{{ path('lescadplatforme_formations_categorie', { 'categorie': cat.slug }) }}">{{ cat.nom }} <span class="badge"> {{cat.formations|length}}</span></a></li>
                 {% endfor %}
         </div>
     {% endif %}

@@ -15,7 +15,7 @@ class formationRepository extends \Doctrine\ORM\EntityRepository {
     public function FindAllWithCategorie() {
         $qb = $this
                 ->createQueryBuilder('f')
-                ->leftJoin('f.categories', 'c')
+                ->leftJoin('f.categorie', 'c')
                 ->addSelect('c')
         ;
 
@@ -77,5 +77,53 @@ class formationRepository extends \Doctrine\ORM\EntityRepository {
         // Enfin, on retourne l'objet Paginator correspondant à la requête construite
         return new Paginator($qb, true);
     }
+    
+    public function FindOneCompleteBySlug($slug) {
+        $qb = $this
+                ->createQueryBuilder('f')
+                ->leftJoin('f.categorie', 'c')
+                ->addSelect('c')
+                ->leftJoin('f.matieres', 'm')
+                ->addSelect('m')
+                ->where('f.slug = :slug')
+                ->setParameter('slug', $slug)
+        ;
 
+        return $qb
+                        ->getQuery()
+                        ->getOneOrNullResult()
+        ;
+    }
+
+    public function FindAllComplete() {
+        $qb = $this
+                ->createQueryBuilder('f')
+                ->leftJoin('f.categories', 'c')
+                ->addSelect('c')
+                ->leftJoin('f.matieres', 'm')
+                ->addSelect('m')
+        ;
+
+        return $qb
+                        ->getQuery()
+                        ->getResult()
+        ;
+    }
+    
+    public function FindAllCompleteByCategorie($cat) {
+        $qb = $this
+                ->createQueryBuilder('f')
+                ->leftJoin('f.categorie', 'c')
+                ->addSelect('c')
+                ->leftJoin('f.matieres', 'm')
+                ->addSelect('m')
+                ->where('c.nom = :cat')
+                ->setParameter('cat', $cat)
+        ;
+
+        return $qb
+                        ->getQuery()
+                        ->getResult()
+        ;
+    }
 }

@@ -8,10 +8,10 @@
 {% endblock %}
 
 {% block baniere %}
-        <div>
-            <img src="{{ vich_uploader_asset(formation, 'fichierBanniere')| imagine_filter ( 'ban4' ) }}" alt="{{ formation.nom }}" style="width:100%; padding-top:51px; padding-bottom: 10px;">     
-        </div>
-    {% endblock %}
+    <div>
+        <img src="{{ vich_uploader_asset(formation, 'fichierBanniere')| imagine_filter ( 'ban4' ) }}" alt="{{ formation.nom }}" style="width:100%; padding-top:51px; padding-bottom: 10px;">     
+    </div>
+{% endblock %}
 
 {% block lescadplatforme_body %}
     <div class="container">
@@ -45,18 +45,37 @@
                         <div class="well">
                             <h1 class="text-center"><b>{{ formation.nom|upper }}</b></h1><hr/>
 
-                            <p>{{ formation.description }}</p>
-                            <p><strong>Durée : </strong>{{ formation.dureereel }}.</p>
-                            <p><strong>Matières : </strong>
-                            <ul>
-                                {% for matiere in formation.matieres %}
-                                    <li>{{ matiere.nom }} ({{ matiere.duree }} heures)</li>
-                                    {% endfor %}
-                            </ul>
-                            </p>
-                            <p><strong>Pré-réquis : </strong><br/>{{ formation.prerequis }}</p>
-                            <p><strong>Prix : </strong>{{ formation.cout }}</p>
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <p>{{ formation.description|nl2br }}</p>
+                            <table class="table">                               
+                                <tbody>
+                                    <tr>
+                                        <td>Sommaire :</td>
+                                        <td><ul>
+                                                {% for matiere in formation.matieres %}
+                                                    <li>{{ matiere.nom }} ({{ matiere.duree }} heures)</li>
+                                                    {% endfor %}
+                                            </ul></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Durée totale :</td>
+                                        <td>{{ formation.duree }} heures</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Durée réelle Moyenne :</td>
+                                        <td>{{ formation.dureereel }} (8 heures de cours par semaine)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pré-réquis :</td>
+                                        <td>{{ formation.prerequis }}</td>
+                                    </tr>
+                                    <tr class="success">
+                                        <td>Prix :</td>
+                                        <td>{{ formation.cout }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            {% if is_granted("SUPER_ADMIN") %}
                                 <div class="more label"><a href="{{ path('admin_lescad_platforme_formation_edit', { 'id': formation.id }) }}">Modifier</a></div> 
                             {% endif %}
                         </div>
@@ -86,7 +105,43 @@
 
                 </div>
             </div>
-
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="callout-dark fade-in-b">
+                <div class="container">
+                    <h1>Autres formations en <a href="{{ path('lescadplatforme_formations_categorie', { 'categorie': formation.categorie.slug }) }}">{{ formation.categorie.nom }}</a> </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% set n = 0 %}
+            {% for form in formations if n < 3 %}
+                {% if form.nom != formation.nom %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="single-blog-item">
+                            <div class="blog-thumnail">
+                                {% if form.nomImage %}
+                                    <img src="{{ vich_uploader_asset(form, 'fichierImage') }}" alt="{{ form.nom }}" />
+                                {% else %}
+                                    <img src="http://hpservicecenterschennai.in/images/hp_laptop_service_centers_in_guindy.png" alt="dsadas" />
+                                {% endif %}
+                                {#<a href=""><img src="http://via.placeholder.com/370x275" alt="blog-img"></a>#}
+                            </div>
+                            <div class="blog-content">
+                                <h4><a href="{{ path('lescadplatforme_formation', { 'formationSlug': form.slug }) }}">{{ form.nom|upper }}</a></h4>
+                                <p>{{ form.description|truncate(130, true, " ...") }}</p>
+                                <a href="{{ path('lescadplatforme_formation', { 'formationSlug': form.slug }) }}" class="more-btn">Détails</a>
+                            </div>
+                            <span class="blog-date">{{ form.dureereel }}</span>
+                        </div>
+                    </div>
+                    {% set n = n + 1 %}
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

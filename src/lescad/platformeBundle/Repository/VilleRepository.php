@@ -10,4 +10,11 @@ namespace lescad\platformeBundle\Repository;
  */
 class VilleRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getOrderedQueryBuilder()
+  {
+    return $this
+      ->createQueryBuilder('v')
+      ->orderBy('v.nom', 'ASC')
+    ;
+  }
 }

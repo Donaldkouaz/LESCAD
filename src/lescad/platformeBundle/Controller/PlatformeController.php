@@ -161,7 +161,9 @@ class PlatformeController extends Controller {
     public function formationAction(Request $request, $formationSlug) {
 
 
-        $formation = $this->getDoctrine()->getManager()->getRepository('lescadplatformeBundle:formation')->findOneBySlug($formationSlug);
+        $formation = $this->getDoctrine()->getManager()->getRepository('lescadplatformeBundle:formation')->findOneCompleteBySlug($formationSlug);
+        $cat = $formation->getCategorie()->getNom();
+        $formations = $this->getDoctrine()->getManager()->getRepository('lescadplatformeBundle:formation')->findAllCompleteByCategorie($cat);
 
         // Si la page n'existe pas, on retourne une 404
         if ($formation == NULL) {
@@ -183,6 +185,7 @@ class PlatformeController extends Controller {
 
         return $this->render('lescadplatformeBundle:plateforme:formation.html.twig', array('formation' => $formation,
                     'form' => $form->createView(),
+            'formations' => $formations,
         ));
     }
 

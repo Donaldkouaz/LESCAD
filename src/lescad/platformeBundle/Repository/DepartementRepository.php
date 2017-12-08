@@ -10,4 +10,11 @@ namespace lescad\platformeBundle\Repository;
  */
 class DepartementRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getOrderedQueryBuilder()
+  {
+    return $this
+      ->createQueryBuilder('d')
+      ->orderBy('d.nom', 'ASC')
+    ;
+  }
 }

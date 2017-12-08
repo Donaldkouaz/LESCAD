@@ -208,6 +208,7 @@ class formation {
      * @return int
      */
     public function getDuree() {
+        $this->duree = 0;
         foreach ($this->matieres as $matiere) {
             $this->duree += $matiere->getDuree();
         }
@@ -232,8 +233,8 @@ class formation {
         } elseif ($t <= (6 * $n)) {
             $this->dureereel = 'Trois semaines';
         } elseif ($t < 417) {
-            $q = intdiv($t, 8 * $n) + 1;
-            $this->dureereel = $q . ' mois';
+            $q = ceil($t/(8*$n));
+            $this->dureereel = $q.' mois';
         }
         return $this->dureereel;
     }

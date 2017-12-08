@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use lescad\platformeBundle\Repository\VilleRepository;
+use lescad\platformeBundle\Repository\DepartementRepository;
 
 class DemandeCoursType extends AbstractType
 {
@@ -37,12 +39,22 @@ class DemandeCoursType extends AbstractType
             'choice_label'    => 'nom',
             'multiple' => false,
             'expanded' => false,
+            'query_builder' => function(DepartementRepository $repository) {
+
+          return $repository->getOrderedQueryBuilder();
+
+        }
         ))
                 ->add('ville',EntityType::class, array(
             'class'   => 'lescadplatformeBundle:Ville',
             'choice_label'    => 'nom',
             'multiple' => false,
             'expanded' => false,
+            'query_builder' => function(VilleRepository $repository) {
+
+          return $repository->getOrderedQueryBuilder();
+
+        }
         ))
                 ->add('message', TextareaType::class, array(
             'attr'   => array(
