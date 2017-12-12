@@ -7,9 +7,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class carouselAdmin extends AbstractAdmin
+class DemandeRecrutAdmin extends AbstractAdmin
 {
     /**
      * @param DatagridMapper $datagridMapper
@@ -17,7 +16,9 @@ class carouselAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('active')
+            ->add('contactee')
+            ->add('nom')
+            ->add('prenom')
         ;
     }
 
@@ -27,9 +28,12 @@ class carouselAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('titre')
-            ->add('description')
-            ->add('active')
+            ->addIdentifier('nom')
+            ->add('prenom')
+            ->add('telephone')
+            ->add('message')
+            ->add('datedemande')
+            ->add('contactee')
             ->add('_action', null, array(
                 'actions' => array(
                     'show' => array(),
@@ -44,21 +48,7 @@ class carouselAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('titre')
-            ->add('description');
-                
-         if ($this->hasAccess('edit')) 
-             {
-             $formMapper
-            ->add('active');
-             }
-            $formMapper
-            ->add('fichier', VichImageType::class, [
-                    'required' => false,
-                    'allow_delete' => true,
-                    'download_uri' => false,
-                    'image_uri' => true,
-                ])
+            ->add('contactee')      
         ;
     }
 
@@ -68,13 +58,12 @@ class carouselAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
+            ->add('contactee')
+            ->add('message')
+            ->add('datedemande')
             ->add('nom')
-            ->add('taille')
-            ->add('titre')
-            ->add('description')
-            ->add('datecreation')
-            ->add('datemodification')
-            ->add('active')
+            ->add('prenom')
+            ->add('telephone')
         ;
     }
 }

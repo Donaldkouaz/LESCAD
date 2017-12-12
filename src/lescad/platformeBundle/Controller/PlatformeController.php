@@ -5,6 +5,7 @@
 namespace lescad\platformeBundle\Controller;
 
 use lescad\platformeBundle\Entity\DemandeCours;
+use lescad\platformeBundle\Repository\VilleRepository;
 use lescad\platformeBundle\Entity\ServiceClient;
 use lescad\platformeBundle\Entity\Suggestion;
 use lescad\platformeBundle\Entity\DemandeRecrut;
@@ -12,6 +13,7 @@ use lescad\platformeBundle\Form\DemandeCoursType;
 use lescad\platformeBundle\Form\DemandeRecrutType;
 use lescad\platformeBundle\Form\ServiceClientType;
 use lescad\platformeBundle\Form\SuggestionType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -263,6 +265,36 @@ class PlatformeController extends Controller {
         }
 
         return $this->render('lescadplatformeBundle:plateforme:suggestion.html.twig', array(
+                    'form' => $form->createView(),
+        ));
+    }
+    
+    public function AjaxVilleAction(Request $request) {
+        
+        $dep = $request->query->get('dep');
+        
+        $demande = new DemandeCours();
+        
+        $formBuilder = $this->createFormBuilder($demande);
+        
+        $formBuilder
+            ->add('ville',EntityType::class, array(
+            'class'   => 'lescadplatformeBundle:Ville',
+            'choice_label'    => 'nom',
+            'multiple' => false,
+            'expanded' => false,
+            'query_builder' => function(VilleRepository $repository) use($dep) {
+
+          return $repository->findAllByDepartement($dep);
+
+        }
+        ));
+        
+        $form = $formBuilder->getForm();
+        
+        
+
+        return $this->render('lescadplatformeBundle:plateforme:villes.html.twig', array(
                     'form' => $form->createView(),
         ));
     }

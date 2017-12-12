@@ -7,9 +7,26 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class DemandeCoursAdmin extends AbstractAdmin
 {
+    protected $datagridValues = array(
+
+        // reverse order (default = 'ASC')
+        '_sort_order' => 'DESC',
+    );
+    
+    public function __construct(
+    $code,
+    $class,
+    $baseControllerName,
+    TokenStorageInterface $tokenStorage
+) {
+    parent::__construct($code, $class, $baseControllerName);
+    $this->tokenStorage = $tokenStorage;
+}
+    
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -78,4 +95,19 @@ class DemandeCoursAdmin extends AbstractAdmin
             
         ;
     }
+    
+    public function createQuery($context = 'list')
+{
+    $query = parent::createQuery($context);
+    if (!$this->hasAccess('delete')) 
+             {
+       $ville = $this->tokenStorage->getToken()->getUser()->getVille()->getId();
+                $query->andWhere(
+        $query->expr()->eq($query->getRootAliases()[0] . '.ville', ':my_param')
+    );
+    $query->setParameter('my_param', $ville);
+             }
+    
+    return $query;
+}
 }

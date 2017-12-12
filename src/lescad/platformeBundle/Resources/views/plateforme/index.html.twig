@@ -1,7 +1,7 @@
 {% extends "lescadplatformeBundle::layout.html.twig" %}
 
 {% block titre %}
-    Accueil - {{ parent() }}
+    LESCAD - {{ parent() }}
 {% endblock %}
 
 {% block css %} 
@@ -14,7 +14,7 @@
 
     <div class="container-fluid ca">
         <!-- Indicators -->
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="20000">
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 {% for wrapper in carousel if wrapper.active %}

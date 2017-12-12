@@ -74,3 +74,7 @@ lescadplatforme_suggestion:
     defaults: 
         _controller: lescadplatformeBundle:Platforme:suggestion
 
+lescadplatforme_ajax_ville:
+    path:     /ajax
+    defaults:
+        _controller: lescadplatformeBundle:Platforme:ajaxville

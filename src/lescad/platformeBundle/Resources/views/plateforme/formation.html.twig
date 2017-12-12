@@ -66,7 +66,7 @@
                                     </tr>
                                     <tr>
                                         <td>Pré-réquis :</td>
-                                        <td>{{ formation.prerequis }}</td>
+                                        <td>{{ formation.prerequis|nl2br }}</td>
                                     </tr>
                                     <tr class="success">
                                         <td>Prix :</td>
@@ -144,4 +144,7 @@
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }} <script src="{{asset('bundles/lescadplatforme/js/formation.js')}}"></script>
 {% endblock %}

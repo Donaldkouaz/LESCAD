@@ -81,35 +81,35 @@ services:
         class: lescad\platformeBundle\Admin\carouselAdmin
         arguments: [~, lescad\platformeBundle\Entity\carousel, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Page d'accueil", label: carousel }
+            - { name: sonata.admin, manager_type: orm, group: "Page d'accueil", label: Carousels }
         public: true
 
     lescadplatforme.admin.categorie:
         class: lescad\platformeBundle\Admin\categorieAdmin
         arguments: [~, lescad\platformeBundle\Entity\categorie, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Formations, label: categorie }
+            - { name: sonata.admin, manager_type: orm, group: Formations, label: Catégories }
         public: true
 
     lescadplatforme.admin.demande_cours:
         class: lescad\platformeBundle\Admin\DemandeCoursAdmin
-        arguments: [~, lescad\platformeBundle\Entity\DemandeCours, SonataAdminBundle:CRUD]
+        arguments: [~, lescad\platformeBundle\Entity\DemandeCours, SonataAdminBundle:CRUD, '@security.token_storage']
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Service client", label: DemandeCours }
+            - { name: sonata.admin, manager_type: orm, group: "Service client", label: "Demandes de cours" }
         public: true
 
     lescadplatforme.admin.departement:
         class: lescad\platformeBundle\Admin\DepartementAdmin
         arguments: [~, lescad\platformeBundle\Entity\Departement, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Lieux, label: Departement }
+            - { name: sonata.admin, manager_type: orm, group: Lieux, label: Départements }
         public: true
 
     lescadplatforme.admin.formation:
         class: lescad\platformeBundle\Admin\formationAdmin
         arguments: [~, lescad\platformeBundle\Entity\formation, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Formations, label: formation }
+            - { name: sonata.admin, manager_type: orm, group: Formations, label: Formations }
         public: true
 
     lescadplatforme.admin.pays:
@@ -130,12 +130,33 @@ services:
         class: lescad\platformeBundle\Admin\VilleAdmin
         arguments: [~, lescad\platformeBundle\Entity\Ville, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Lieux, label: Ville }
+            - { name: sonata.admin, manager_type: orm, group: Lieux, label: Villes }
         public: true
 
     lescadplatforme.admin.matiere:
         class: lescad\platformeBundle\Admin\matiereAdmin
         arguments: [~, lescad\platformeBundle\Entity\matiere, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Formations, label: matiere }
+            - { name: sonata.admin, manager_type: orm, group: Formations, label: Matières }
+        public: true
+
+    lescadplatforme.admin.demande_recrut:
+        class: lescad\platformeBundle\Admin\DemandeRecrutAdmin
+        arguments: [~, lescad\platformeBundle\Entity\DemandeRecrut, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Service client", label: "Demande de recrutement" }
+        public: true
+
+    lescadplatforme.admin.service_client:
+        class: lescad\platformeBundle\Admin\ServiceClientAdmin
+        arguments: [~, lescad\platformeBundle\Entity\ServiceClient, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Service client", label: "Requettes Clients" }
+        public: true
+
+    lescadplatforme.admin.suggestion:
+        class: lescad\platformeBundle\Admin\SuggestionAdmin
+        arguments: [~, lescad\platformeBundle\Entity\Suggestion, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Service client", label: Suggestions }
         public: true

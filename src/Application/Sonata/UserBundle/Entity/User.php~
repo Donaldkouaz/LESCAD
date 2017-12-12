@@ -11,25 +11,31 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
-use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
+use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="fos_user_group")
+ * @ORM\Table(name="fos_user_user")
  * @ORM\Entity
  */
 
-
-class Group extends BaseGroup
+class User extends BaseUser
 {
+   
     /**
      * @var int $id
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    
     protected $id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="lescad\platformeBundle\Entity\Ville", cascade={"persist"})
+     * 
+     * 
+     */
+    private $ville;
 
     /**
      * Get id
@@ -40,4 +46,5 @@ class Group extends BaseGroup
     {
         return $this->id;
     }
+    
 }

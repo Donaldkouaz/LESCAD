@@ -119,7 +119,7 @@ img {
     border: 1px solid #dfdede;
     box-shadow: 2px 5px 10px #dfdede;
     margin: 30px auto;
-    padding: 5px;
+    padding: 0px;
     position: relative;
 }
 .blog-content {
@@ -140,13 +140,12 @@ img {
     font-weight: 300;
     line-height: 1.3333;
 }
-.blog-date{
-}
+
 .blog-date {
     position: absolute;
     background: #337ab7;
     top: 35px;
-    left: 5px;
+    left: 0px;
     color: #fff;
     border-radius: 0 25px 25px 0;
     padding: 5px 15px;
