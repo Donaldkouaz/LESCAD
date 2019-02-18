@@ -16,6 +16,8 @@ class categorieRepository extends \Doctrine\ORM\EntityRepository
         ->createQueryBuilder('c')
         ->leftJoin('c.formations', 'f')
         ->addSelect('f')
+        ->where('f.active = :true')
+        ->setParameter('true', 1)
         ->orderBy('c.nom', 'ASC')
       ;
     

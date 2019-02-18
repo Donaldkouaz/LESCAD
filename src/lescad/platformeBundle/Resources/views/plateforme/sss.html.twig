@@ -49,7 +49,7 @@
 
                                 <p><b>{{ sss.description }}</b></p>
                                 <hr>
-                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                {% if is_granted("ROLE_LESCADPLATFORME_ADMIN_SSS_EDIT") %}
                                     <div class="more label"><a href="{{ path('admin_lescad_platforme_sss_edit', { 'id': sss.id }) }}">Modifier</a></div> 
                                 {% endif %}
                             {% endif %}

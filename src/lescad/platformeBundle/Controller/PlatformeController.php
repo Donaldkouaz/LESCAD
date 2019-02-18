@@ -259,7 +259,7 @@ class PlatformeController extends Controller {
             $em->persist($demande);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('notice', 'Votre demande a bien été envoyé. Vous serez contacté tres bientot par un agent de votre région.');
+            $request->getSession()->getFlashBag()->add('notice', 'Votre suggestion a bien été envoyé et nous en tiendrons compte. L\'équipe vous remercie !');
 
             return $this->redirectToRoute('lescadplatforme_services');
         }

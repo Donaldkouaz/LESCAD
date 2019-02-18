@@ -134,7 +134,7 @@
                             <div class="blog-content">
                                 <h4><a href="{{ path('lescadplatforme_formation', { 'formationSlug': form.slug }) }}">{{ form.nom|upper }}</a></h4>
                                 <p>{{ form.description|truncate(130, true, " ...") }}</p>
-                                <a href="{{ path('lescadplatforme_formation', { 'formationSlug': form.slug }) }}" class="more-btn">Détails</a>
+                                <a href="{{ url('lescadplatforme_formation', { 'formationSlug': form.slug }) }}" class="more-btn">Détails</a>
                             </div>
                             <span class="blog-date">{{ form.dureereel }}</span>
                         </div>

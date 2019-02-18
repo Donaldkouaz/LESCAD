@@ -38,7 +38,7 @@
                 {% if formations is null %}
                     <h1>Il n'y a aucune formation dans cette categorie pour le moment</h1>
                 {% else %}
-                    {% for formation in formations %}
+                    {% for formation in formations if formation.active %}
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="my-list">
                                 {% if formation.nomImage %}
@@ -53,7 +53,7 @@
                                 <div class="detail">
                                     <h4>{{ formation.nom }}</h4>
                                     <p>{{ formation.description|truncate(350, true, " ...") }}</p>
-                                    <a href="#" class="btn btn-info">Commander</a>
+                                    <a href="#" class="btn btn-info">Demander cette formation</a>
                                     <a href="{{ path('lescadplatforme_formation', { 'formationSlug': formation.slug }) }}" class="btn btn-info">Voir</a>
                                 </div>
                             </div>

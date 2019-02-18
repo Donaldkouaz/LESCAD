@@ -3,8 +3,8 @@ parameters:
     database_host: 127.0.0.1
     database_port: null
     database_name: lescad
-    database_user: root
-    database_password: null
+    database_user: Donald
+    database_password: "04481099"
     mailer_transport: gmail
     mailer_host: smtp.gmail.com
     mailer_user: donald.kouazoun@gmail.com

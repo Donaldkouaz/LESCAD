@@ -118,7 +118,9 @@ class formationRepository extends \Doctrine\ORM\EntityRepository {
                 ->leftJoin('f.matieres', 'm')
                 ->addSelect('m')
                 ->where('c.nom = :cat')
+                ->andwhere('f.active = :true')
                 ->setParameter('cat', $cat)
+                ->setParameter('true', 1)
         ;
 
         return $qb

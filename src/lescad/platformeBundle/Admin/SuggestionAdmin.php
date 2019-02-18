@@ -34,7 +34,7 @@ class SuggestionAdmin extends AbstractAdmin
             ->add('telephone')
             ->add('message')
             ->add('datedemande')
-            ->add('contactee')
+            ->addIdentifier('contactee')
             ->add('_action', null, array(
                 'actions' => array(
                     'show' => array(),

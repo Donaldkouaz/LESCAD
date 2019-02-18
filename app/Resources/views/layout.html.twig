@@ -10,8 +10,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% block css %}
-            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
             {% stylesheets filter='cssrewrite, scssphp'
+            'css/bootstrap.min.css'
             'css/globale.css'
             'css/font-awesome.css' %}
             <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
@@ -36,24 +36,24 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="{{path('lescadplatforme_accueil')}}">LESCAD</a>
+                        <a class="navbar-brand" href="{{url('lescadplatforme_accueil')}}">LESCAD</a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a class="men" href="{{path('lescadplatforme_accueil')}}">ACCUEIL</a></li>
-                            <li><a href="{{path('lescadplatforme_ss')}}">SOUTIEN SCOLAIRE</a></li>
-                            <li><a href="{{path('lescadplatforme_formations')}}">FORMATION</a></li>
-                            <li><a href="{{path('lescadplatforme_demande_cours')}}">DEMANDER UN COURS</a></li>
+                            <li><a class="men" href="{{url('lescadplatforme_accueil')}}">ACCUEIL</a></li>
+                            <li><a href="{{url('lescadplatforme_ss')}}">SOUTIEN SCOLAIRE</a></li>
+                            <li><a href="{{url('lescadplatforme_formations')}}">FORMATION</a></li>
+                            <li><a href="{{url('lescadplatforme_demande_cours')}}">DEMANDER UN COURS</a></li>
                         </ul>
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
                                     <a href="#" data-toggle="dropdown" class="dropdown-toggle menuHaut"><span class="glyphicon glyphicon-user"></span>  {{ app.user.username }} <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path('sonata_admin_dashboard') }}">Tableau de bord</a></li>
-                                        <li><a href="{{ path('fos_user_profile_show') }}">Mon profil</a></li>
+                                        <li><a href="{{ url('sonata_admin_dashboard') }}">Tableau de bord</a></li>
+                                        <li><a href="{{ url('fos_user_profile_show') }}">Mon profil</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                                        <li><a href="{{ url('fos_user_security_logout') }}">Déconnexion</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -73,7 +73,7 @@
                                                         <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
                                                     </div>
 
-                                                    <form class="form" role="form" method="post" action="{{ path("fos_user_security_check") }}" accept-charset="UTF-8" id="login-nav">
+                                                    <form class="form" role="form" method="post" action="{{ url("fos_user_security_check") }}" accept-charset="UTF-8" id="login-nav">
                                                         <div class="form-group">
                                                             <label class="sr-only" for="username">{{ 'security.login.username'|trans }}</label>
                                                             <input type="text" class="form-control" placeholder="Nom d'utilisateur" id="username" name="_username" required="required" />
@@ -98,7 +98,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
+                                <li><a href="{{ url('fos_user_registration_register') }}">Inscription</a></li>
                             </ul>#}
                         {% endif %}
                     </div><!--/.navbar-collapse -->
@@ -177,10 +177,10 @@
                                 <div class="link-area">
                                     <h3>NOUS CONTACTER</h3>
                                     <ul>
-                                        <li><a href="{{path('lescadplatforme_demande_cours')}}"> Demander un cours</a></li>
-                                        <li><a href="{{path('lescadplatforme_recrutement')}}"> Devenir enseignant</a></li>
-                                        <li><a href="{{path('lescadplatforme_serviceclient')}}"> Service client</a></li>
-                                        <li><a href="{{path('lescadplatforme_suggestion')}}"> Faire une suggestion</a></li>
+                                        <li><a href="{{url('lescadplatforme_demande_cours')}}"> Demander un cours</a></li>
+                                        <li><a href="{{url('lescadplatforme_recrutement')}}"> Devenir enseignant</a></li>
+                                        <li><a href="{{url('lescadplatforme_serviceclient')}}"> Service client</a></li>
+                                        <li><a href="{{url('lescadplatforme_suggestion')}}"> Faire une suggestion</a></li>
 
                                     </ul>
                                 </div>
@@ -192,7 +192,7 @@
                 <section class="index-social">
                     <div class="container">
                         <div class="row index-social-link text-center">
-                            <p class="copy-c">Copyright © 2017 LESCAD. All Rights Reserved.</p>
+                            <p class="copy-c">Copyright © {{ "now"|date("Y") }} LESCAD. All Rights Reserved.</p>
                         </div>
                     </div>
                 </section>
@@ -200,8 +200,8 @@
 
         </div>
         {% block javascripts %}
-            <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="{{asset('js/jquery-1.12.4.min.js')}}"></script>
+            <script src="{{asset('js/bootstrap.min.js')}}" type="text/javascript"></script>
         {% endblock %}
     </body>
 </html>

@@ -85,7 +85,7 @@ swiftmailer:
 # FSOUser Configuration
 
 fos_user:
-    db_driver:     orm                       # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
+    db_driver:     orm                       # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine
     firewall_name: main                      # Le nom du firewall derrière lequel on utilisera ces utilisateurs
     user_class:    Application\Sonata\UserBundle\Entity\User # La classe de l'entité User que nous utilisons
     use_listener:           true
@@ -275,8 +275,8 @@ vich_uploader:
                 uri_prefix:         /lescad/web/images/formations
                 upload_destination: '%kernel.root_dir%/../web/images/formations'
                 namer:
-                    service: vich_uploader.namer_property
-                    options: { property: 'slug'}
+                    service: vich_uploader.namer_origname
+                   # options: { property: 'slug'}#
                 
                 inject_on_load:     true
                 delete_on_update:   true
@@ -285,8 +285,8 @@ vich_uploader:
                 uri_prefix:         /lescad/web/images/formations/banniere
                 upload_destination: '%kernel.root_dir%/../web/images/formations/banniere'
                 namer:
-                    service: vich_uploader.namer_property
-                    options: { property: 'slug'}
+                    service: vich_uploader.namer_origname
+                   # options: { property: 'slug'}#
                 
                 inject_on_load:     true
                 delete_on_update:   true
